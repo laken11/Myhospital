@@ -1,0 +1,40 @@
+{% extends 'forstaff.html' %}
+{% block content %}
+    <div class="container">
+        <div class="row mt_130">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Doctor list</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="table table-hover table-responsive">
+                            <thead>
+                            <tr>
+                                <th> Doctor First name</th>
+                                <th>Doctor Last name</th>
+                                <th>Patient First name</th>
+                                <th>Patient Last name</th>
+                                <th>Appointment date</th>
+                                <th>Appointment reference</th>
+                            </tr>
+                            </thead>
+                            {% for appointment in appointments %}
+                                <tbody>
+                                <tr>
+                                    <td>{{ appointment.doctor_first_name }}</td>
+                                    <td>{{ appointment.doctor_last_name }}</td>
+                                    <td>{{ appointment.patient_first_name }}</td>
+                                    <td>{{ appointment.patient_last_name }}</td>
+                                    <td>{{ appointment.datetime }}</td>
+                                    <td>{{ appointment.reference }}</td>
+                                </tr>
+                                </tbody>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

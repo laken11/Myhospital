@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% if patient %}
+        <div class="container">
+            <div class="row mt_130 mx-auto">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Patient
+                                details: {{ patient.user_last_name }} {{ patient.user_first_name }}</h3>
+                        </div>
+                        <div class="card-body">
+                            <div>
+                                <div class="form-row">
+                                    <div class="form-group col-6">
+                                        <label for="first_name" class="form-check-label">First Name:</label>
+                                        <label class="form-control disabled" type="text"
+                                               id="first_name">{{ patient.user_first_name }}</label>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label for="last_name" class="form-check-label">Last Name:</label>
+                                        <label class="form-control disabled" type="text"
+                                               id="last_name">{{ patient.user_last_name }}</label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email" class="form-check-label">Email</label>
+                                    <label class="form-control disabled" type="email"
+                                           id="email">{{ patient.user_email }}</label>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-6">
+                                        <label for="phone" class="form-check-label">Phone:</label>
+                                        <label class="form-control disabled" type="tel"
+                                               id="phone">{{ patient.phone }}</label>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label for="occupation" class="form-check-label">Occupation:</label>
+                                        <label class="form-control disabled" type="text"
+                                               id="occupation">{{ patient.occupation }}</label>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-6">
+                                        <label for="marital_status" class="form-check-label">Marital status:</label>
+                                        <label class="form-control disabled" id="marital_status"
+                                               type="text">{{ patient.marital_status }}</label>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label for="next_of_kin" class="form-check-label">Next_of_kin</label>
+                                        <label class="form-control disabled" id="next_of_kin"
+                                               type="text">{{ patient.next_of_kin }}</label>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-6">
+                                        <label for="date_of_birth" class="form-check-label">Date Of Birth:</label>
+                                        <label class="form-control disabled"
+                                               id="date_of_birth" type="date">{{ patient.date_of_birth }}</label>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label for="gender" class="form-check-label">Gender:</label>
+                                        <label id="gender" type="text"
+                                               class="form-control disabled">{{ patient.gender }}</label>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-6">
+                                        <label for="blood_group" class="form-check-label">Blood Group</label>
+                                        <label class="form-control disabled"
+                                               id="blood_group" type="text">{{ patient.blood_group }}</label>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label for="genotype" class="form-check-label">Genotype:</label>
+                                        <label class="form-control disabled"
+                                               id="genotype" type="text">{{ patient.genotype }}</label>
+                                    </div>
+                                </div>
+                               <div class="form-row">
+                                   <div class="form-group col-6">
+                                       <label for="address" class="form-check-label">Address:</label>
+                                       <label class="form-control disabled"
+                                              id="address" type="text">{{ patient.address }}</label>
+                                   </div>
+                                   <div class="form-group col-6">
+                                       <label for="patient_number" class="form-check-label">Patient Number</label>
+                                       <label class="form-control disabled" id="patient_number" type="text">{{ patient.patient_number }}</label>
+                                   </div>
+                               </div>
+                                <div class="from-group">
+                                    <label for="patient_id" class="">Patient ID</label>
+                                    <label class="form-control disabled" type="text" id="patient_id">{{ patient.patient_id }}</label>
+                                </div>
+                                <div class="card-footer">
+                                    <a href="{% url 'list_patients' %}" class="btn btn-success">Back</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <p class="text-center text-into mt_130"> Patient details dose not exit</p>
+    {% endif %}
+{% endblock %}

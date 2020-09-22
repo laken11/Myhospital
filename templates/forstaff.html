@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{% static 'api/assets/css/work.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'api/assets/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+    <script src="{% static 'api/assets/js/jquery-1.12.1.min.js' %}"></script>
+    <script src="{% static 'api/assets/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'api/assets/js/popper.min.js' %}"></script>
+</head>
+<body>
+
+<div class="sidenav">
+    <p class="btn  border border-success">WELCOME</p>
+    <a href="#about" class="btn">Home</a>
+    <a href="#services" class="btn">Services</a>
+    <div class="dropdown show">
+        <a class="dropdown-toggle btn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Staff management
+        </a>
+
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="#">Edit staff</a>
+            <a class="dropdown-item" href="#">List staff</a>
+            <a class="dropdown-item" href="#">Add staff</a>
+        </div>
+    </div>
+    <div class="dropdown show">
+        <a class="dropdown-toggle btn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Patient management
+        </a>
+
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="{% url 'list_patients' %}">List patient</a>
+            <a class="dropdown-item" href="#">List appointment</a>
+            <a class="dropdown-item" href="{% url 'create_doctors' %}">Add doctors</a>
+        </div>
+    </div>
+</div>
+<div class="logout">
+    <a class="btn btn-success" href="{% url 'logout' %}">Log out</a>
+</div>
+
+<div class="main">
+    <div class ='headn'>
+        <h2 class="text-info bg-warning"></h2>
+    </div>
+    {% block content %}
+    {% endblock %}
+</div>
+<script src="{% static 'api/assets/js/jquery-1.12.1.min.js' %}"></script>
+<script src="{% static 'api/assets/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'api/assets/js/popper.min.js' %}"></script>
+</body>
+</html>

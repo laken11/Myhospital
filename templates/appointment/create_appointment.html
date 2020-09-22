@@ -1,0 +1,50 @@
+{% extends 'forpatient.html' %}
+{% block content %}
+    <div class="container">
+        <div class="row mt_130">
+            <div class="col-md-16">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Doctor Registration</h2>
+                    </div>
+                    <form action="{% url '' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="doctor_id" class="form-check-label">Doctor</label>
+                                <select name="doctor_id" class="form-control" id="doctor_id" type="text">
+                                    {% for d in doctor %}
+                                        <option label="{{ d.text }}" value="{{ d.id }}">{{ d.text }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="patient_id" class="form-check-label">Patient</label>
+                                <select name="patient_id" class="form-control" id="patient_id" type="text">
+                                    {% for p in patient %}
+                                        <option label="{{ p.patient }}" value="{{ p.id }}">{{ p.text }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-6">
+                                <label for="appointment_datetime" class="form-check-label">specialization</label>
+                                <input name="appointment_datetime" class="form-control" type="text" id="appointment_datetime"
+                                       value="{{ appointment.appointment_datetime }}">
+                            </div>
+                            <div class="form-group col-6">
+                                <label for="appointment_reference" class="form-check-label">Appointment schedule</label>
+                                <input name="appointment_reference" class="form-control" type="text"
+                                       id="appointment_reference" value="{{ appointment.appointment_reference }}">
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-success" type="submit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'forstaff.html' %}
+{% block content %}
+    <div class="container">
+        <div class="row mt_130 mx-auto">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Staff Edit</h2>
+                    </div>
+                    <form action="" method="POST">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone" class="">Phone</label>
+                                <input name="phone" class="form-control" type="text" id="phone"
+                                       value="{{ staff.phone }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="date_of_birth" class="">Date of birth</label>
+                                <input name="date_of_birth" class="form-control" type="date" id="date_of_birth"
+                                       value="{{ staff.date_of_birth }}">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="address" class="">Address</label>
+                                <input name="address" class="form-control" id="address" value="{{ staff.address }}"
+                                       type="text">
+                            </div>
+                            <div class="form-group">
+                                <label for="year_of_employment" class="">Year of employment</label>
+                                <input name="year_of_employment" id="year_of_employment" type="date"
+                                       value="{{ value.year_of_employment }}">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="job_title" class="">Job title</label>
+                                <input name="job_title" class="form-control" id="job_title" type="text"
+                                       value="{{ staff.job_title }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="level" class="">Level</label>
+                                <input name="level" class="form-control" id="level" value="{{ staff.level }}">
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

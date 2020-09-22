@@ -1,0 +1,79 @@
+{% extends '' %}
+{% block content %}
+    <div class="container">
+        <div class="row mt_130">
+            <div class="col-md-16">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Medical record</h2>
+                    </div>
+                    <form action="{% url '' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="doctor_id" class="form-check-label">Staff</label>
+                                <select name="doctor_id" class="form-control" id="doctor_id" type="text">
+                                    {% for d in doctor %}
+                                        <option label="{{ d.text }}" value="{{ d.id }}">{{ d.text }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="patient_id" class="form-check-label">Staff</label>
+                                <select name="patient_id" class="form-control" id="patient_id" type="text">
+                                    {% for p in patient %}
+                                        <option label="{{ p.text }}" value="{{ p.id }}">{{ p.text }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-6">
+                                <label for="diagnosis" class="form-check-label">Diagnosis</label>
+                                <input name="diagnosis" class="form-control-lg" type="text" id="diagnosis"
+                                       value="{{ medical_record.diagnosis }}">
+                            </div>
+                            <div class="form-group col-6">
+                                <label for="med_ref" class="form-check-label">Medical Reference</label>
+                                <input name="med_ref" class="form-control" type="text"
+                                       id="med_ref" value="{{ medical_record.med_ref }}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="test_required" class="form-check-label">Test required</label>
+                            <input name="test_required" class="form-control" type="text" id="test_required"
+                                   value="{{ medical_record.test_required }}">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="treatment" class="form-check-label">Treatment</label>
+                                <input name="treatment" class="form-control-lg" type="text" id="treatment"
+                                       value="{{ medical_record.treatment }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="medication" class="form-check-label">Medication</label>
+                                <input name="medication" class="form-control-lg" type="text" id="medication"
+                                       value="{{ medical_record.medication }}">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="appointment_history" class="form-check-label">Appointment history</label>
+                                <input name="appointment_history" class="form-control-lg" type="text"
+                                       id="appointment_history" value="{{ medical_record.appointment_history }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="updated_date" class="form-check-label">Updated date</label>
+                                <input name="updated_date" class="form-control" id="updated_date"
+                                       value="{{ medical_record.updated_date }}" type="date">
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-success" type="submit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
