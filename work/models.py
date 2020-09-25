@@ -54,7 +54,7 @@ class MedicalRecords(models.Model):
     treatments = models.CharField(max_length=500)
     medications = models.CharField(max_length=500)
     test_required = models.CharField(max_length=150, null=True)
-    appointment_history = models.DateField()
+    appointment_history = models.CharField(max_length=50)
     updated_date = models.DateField()
     doctor = models.ForeignKey(Doctor, on_delete=models.RESTRICT)
 
@@ -63,7 +63,7 @@ class MedicalRecords(models.Model):
 
 
 class Appointments(models.Model):
-    appointment_datetime = models.DateTimeField()
+    appointment_datetime = models.DateField()
     appointment_reference = models.UUIDField(default=uuid.uuid4, editable=False)
     appointment_number = models.CharField(max_length=10)
     patient = models.ForeignKey(Patient, on_delete=models.RESTRICT)

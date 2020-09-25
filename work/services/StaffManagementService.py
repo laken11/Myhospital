@@ -12,7 +12,7 @@ class StaffManagementService(metaclass=ABCMeta):
         raise NotImplementedError
 
     @abstractmethod
-    def edit_staff(self, model: EditStaffDto):
+    def edit_staff(self, model: EditStaffDto, id):
         """Edit a staff object"""
         raise NotImplementedError
 
@@ -46,8 +46,8 @@ class DefaultStaffManagementService(StaffManagementService):
     def create_staff(self, model: CreateStaffDto):
         return self.repository.create_staff(model)
 
-    def edit_staff(self, model: EditStaffDto):
-        return self.repository.edit_staff(model)
+    def edit_staff(self, model: EditStaffDto, id):
+        return self.repository.edit_staff(model, id=id)
 
     def staff_details(self, id: int) -> StaffDetailsDto:
         return self.repository.staff_details(id=id)

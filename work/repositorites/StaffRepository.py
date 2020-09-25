@@ -13,7 +13,7 @@ class StaffRepository(metaclass=ABCMeta):
         raise NotImplementedError
 
     @abstractmethod
-    def edit_staff(self, model: EditStaffDto):
+    def edit_staff(self, model: EditStaffDto, id):
         """Edit a staff object"""
         raise NotImplementedError
 
@@ -49,18 +49,14 @@ class DjangoOMStaffRepository(StaffRepository):
         staff.year_of_employment = model.year_of_employment
         staff.job_title = model.job_title
         staff.staff_number = model.staff_number
-
         user = User.objects.create_user(model.username, model.email, model.password)
         user.last_name = model.last_name
         user.first_name = model.first_name
-        staff.user = user
         user.save()
-        staffs = Group.objects.get(name='staffs')
-        user.groups.add(staffs)
-
+        staff.user = user
         staff.save()
 
-    def edit_staff(self, model: EditStaffDto):
+    def edit_staff(self, model: EditStaffDto, id):
         try:
             staff = Staff.objects.get(id= id)
             staff.phone = model.phone

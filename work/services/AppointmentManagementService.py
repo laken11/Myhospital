@@ -22,7 +22,7 @@ class AppointManagementService(metaclass=ABCMeta):
         raise NotImplementedError
 
     @abstractmethod
-    def search_appointment(self, appointment_reference: str, appointment_date: date):
+    def search_appointment(self, appointment_number: str):
         """Returns Appointment Object"""
         raise NotImplementedError
 
@@ -36,9 +36,8 @@ class DefaultAppointmentManagementService(AppointManagementService):
     def create_appointment(self, model: CreateAppointmentDto):
         return self.repository.create_appointment(model)
 
-    def search_appointment(self, appointment_reference: str, appointment_date: date):
-        return self.repository.search_appointment(appointment_date=appointment_date,
-                                                  appointment_reference=appointment_reference)
+    def search_appointment(self, appointment_number: str):
+        return self.repository.search_appointment(appointment_number=appointment_number)
 
     def appointment_details(self, id: int) -> AppointmentDetailsDto:
         return self.repository.appointment_details(id=id)

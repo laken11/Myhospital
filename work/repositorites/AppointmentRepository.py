@@ -20,7 +20,7 @@ class AppointmentRepository(metaclass=ABCMeta):
         """List Appointment Objects"""
         raise NotImplementedError
 
-    def search_appointment(self, appointment_reference: str, appointment_date: date):
+    def search_appointment(self, appointment_number: str):
         """Returns Appointment Object"""
         raise NotImplementedError
 
@@ -32,6 +32,8 @@ class DjangoORMAppointmentRepository(AppointmentRepository):
         appointment.appointment_reference = model.appointment_reference
         appointment.appointment_datetime = model.appointment_datetime
         appointment.patient_id = model.patient_id
+        appointment.appointment_number = model.appointment_number
+        appointment.save()
 
     def list_appointment(self) -> List[ListAppointmentDto]:
         appointments = list(Appointments.objects.values('id',
@@ -39,7 +41,7 @@ class DjangoORMAppointmentRepository(AppointmentRepository):
                                                         'patient__user__first_name',
                                                         'doctor__staff__user__first_name',
                                                         'doctor__staff__user__last_name',
-                                                        'appointment_reference',
+                                                        'appointment_number',
                                                         'appointment_datetime'))
         result: List[ListAppointmentDto] = []
         for appointment in appointments:
@@ -48,8 +50,8 @@ class DjangoORMAppointmentRepository(AppointmentRepository):
             item.patient_first_name = appointment['patient__user__last_name']
             item.patient_last_name = appointment['patient__user__first_name']
             item.doctor_first_name = appointment['doctor__staff__user__first_name']
-            item.patient_last_name = appointment['doctor__staff__user__first_name']
-            item.appointment_reference = appointment['appointment_reference']
+            item.doctor_last_name = appointment['doctor__staff__user__last_name']
+            item.appointment_number = appointment['appointment_number']
             item.appointment_datetime = appointment['appointment_datetime']
             result.append(item)
         return result
@@ -71,22 +73,18 @@ class DjangoORMAppointmentRepository(AppointmentRepository):
             print(message)
             raise e
 
-    def search_appointment(self, appointment_reference: str, appointment_date: date):
+    def search_appointment(self, appointment_number: str):
         try:
-            appointment = Appointments.objects
-            if appointment is not None:
-                appointment = appointment.filter(appointment_reference=appointment_reference)
-            if appointment is not None:
-                appointment = appointment.filter(appointment_date=appointment_date)
-
+            appointment = Appointments.objects.get(appointment_number=appointment_number)
             result = SearchAppointmentDto()
             result.id = appointment.id
             result.doctor_last_name = appointment.doctor.staff.user.last_name
             result.doctor_first_name = appointment.doctor.staff.user.first_name
             result.patient_last_name = appointment.patient.user.last_name
-            result.patient_last_name = appointment.patient.user.last_name
+            result.patient_first_name = appointment.patient.user.first_name
             result.appointment_reference = appointment.appointment_reference
-            result.appointment_date = appointment.appointment_date
+            result.appointment_datetime = appointment.appointment_datetime
+            result.appointment_number = appointment.appointment_number
             return result
         except Appointments.DoesNotExist as e:
             message = 'Appointment does not exit'

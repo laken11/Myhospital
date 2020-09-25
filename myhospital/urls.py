@@ -19,10 +19,12 @@ from work.views import Home
 
 urlpatterns = [
     path('', Home.index, name='index'),
+    path('about/', Home.aboutus, name='about'),
     path('admin/', admin.site.urls),
     path('Login/', include('work.views.Login.login_url')),
     path('patients/', include('work.views.PatientViews.patient_url')),
     path('staff/', include('work.views.Staff_view.staff_url')),
     path('doctor/', include('work.views.Doctor_view.doctor_url')),
-    path('medical_record/', include('work.views.medical_record.medical_record_url'))
+    path('medical_record/', include('work.views.medical_record.medical_record_url')),
+    path("appointments/", include('work.views.appointment.appointment_url'))
 ]

@@ -1,103 +1,72 @@
 {% extends 'forpatient.html' %}
 {% block content %}
     <div class="container">
-        <h1 class="text-center text-heading">Welcome to the Patient's Page</h1>
-        <div class="container">
-            <div class="row mt_130 mr-auto">
-                <div class="col-md-8">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Patient
-                                details: {{ last_name }} {{ first_name }}</h3>
-                        </div>
-                        <div class="card-body">
-                            <div>
-                                <div class="form-row">
-                                    <div class="form-group col-6">
-                                        <label for="first_name" class="form-check-label">First Name:</label>
-                                        <label class="form-control disabled" type="text"
-                                               id="first_name">{{ first_name }}</label>
-                                    </div>
-                                    <div class="form-group col-6">
-                                        <label for="last_name" class="form-check-label">Last Name:</label>
-                                        <label class="form-control disabled" type="text"
-                                               id="last_name">{{ last_name }}</label>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="email" class="form-check-label">Email</label>
-                                    <label class="form-control disabled" type="email"
-                                           id="email">{{ email }}</label>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-6">
-                                        <label for="phone" class="form-check-label">Phone:</label>
-                                        <label class="form-control disabled" type="tel"
-                                               id="phone">{{ phone }}</label>
-                                    </div>
-                                    <div class="form-group col-6">
-                                        <label for="occupation" class="form-check-label">Occupation:</label>
-                                        <label class="form-control disabled" type="text"
-                                               id="occupation">{{ occupation }}</label>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-6">
-                                        <label for="marital_status" class="form-check-label">Marital status:</label>
-                                        <label class="form-control disabled" id="marital_status"
-                                               type="text">{{ marital_status }}</label>
-                                    </div>
-                                    <div class="form-group col-6">
-                                        <label for="next_of_kin" class="form-check-label">Next_of_kin</label>
-                                        <label class="form-control disabled" id="next_of_kin"
-                                               type="text">{{ next_of_kin }}</label>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-6">
-                                        <label for="date_of_birth" class="form-check-label">Date Of Birth:</label>
-                                        <label class="form-control disabled"
-                                               id="date_of_birth" type="date">{{ date_of_birth }}</label>
-                                    </div>
-                                    <div class="form-group col-6">
-                                        <label for="gender" class="form-check-label">Gender:</label>
-                                        <label id="gender" type="text"
-                                               class="form-control disabled">{{ gender }}</label>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-6">
-                                        <label for="blood_group" class="form-check-label">Blood Group</label>
-                                        <label class="form-control disabled"
-                                               id="blood_group" type="text">{{ blood_group }}</label>
-                                    </div>
-                                    <div class="form-group col-6">
-                                        <label for="genotype" class="form-check-label">Genotype:</label>
-                                        <label class="form-control disabled"
-                                               id="genotype" type="text">{{ genotype }}</label>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-6">
-                                        <label for="address" class="form-check-label">Address:</label>
-                                        <label class="form-control disabled"
-                                               id="address" type="text">{{ address }}</label>
-                                    </div>
-                                    <div class="form-group col-6">
-                                        <label for="patient_number" class="form-check-label">Patient Number</label>
-                                        <label class="form-control disabled" id="patient_number"
-                                               type="text">{{ patient_number }}</label>
-                                    </div>
-                                </div>
-                                <div class="from-group">
-                                    <label for="patient_id" class="">Patient ID</label>
-                                    <label class="form-control disabled" type="text"
-                                           id="patient_id">{{ patient_id }}</label>
-                                </div>
-                                <div class="card-footer">
-                                    <a href="{% url 'list_patients' %}" class="btn btn-success">Back</a>
-                                </div>
+        <h1 class="text-center text-heading ">WELCOME</h1>
+        <h3 class="text-center">{{ first_name }}</h3>
+        <h2 class="text-info"> Your Patient Number is: {{ patient_number }}</h2>
+        <p> Your patient number is very important as it is unique to you and are used for various transactions within
+            the hospital </p>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="text-center text-truncate">Profile</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group col-6">
+                                <label for="" class="form-check-label">Name:</label>
+                                <p class="form-control">{{ first_name }} {{ last_name }}</p>
                             </div>
+                            <div class="form-group col-6">
+                                <label class="form-check-label">Email</label>
+                                <p class="form-control">{{ email }}</p>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-6">
+                                <label for="" class="form-check-label">Blood group</label>
+                                <p class="form-control">{{ blood_group }}</p>
+                            </div>
+                            <div class="form-group col-6">
+                                <label for="" class="form-check-label">Genotype</label>
+                                <p class="form-control">{{ genotype }}</p>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="group col-6">
+                                <label class="form-check-label">Marital status</label>
+                                <p class="form-control">{{ marital_status }}</p>
+                            </div>
+                            <div class="form-group col-6">
+                                <label class="form-check-label">Next of kin</label>
+                                <p class="form-control">{{ next_of_kin }}</p>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-6">
+                                <label class="form-check-label">Gender</label>
+                                <p class="form-control">{{ gender }}</p>
+                            </div>
+                            <div class="form-group col-6">
+                                <label class="form-check-label">Date of birth</label>
+                                <p class="form-control">{{ date_of_birth }}</p>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-6">
+                                <label class="form-check-label">Occupation</label>
+                                <p class="form-control">{{ occupation }}</p>
+                            </div>
+                            <div class="form-group col-6">
+                                <label class="form-check-label">Address</label>
+                                <p class="form-control">{{ address }}</p>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <a href="{% url 'edit_patient' id %}" class="btn btn-warning float-right">Edit</a>
                         </div>
                     </div>
                 </div>

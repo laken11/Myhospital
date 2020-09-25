@@ -1,5 +1,5 @@
 import uuid
-
+from work.decorators import allowed_users
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, Http404, HttpRequest
 from django.shortcuts import render, redirect
@@ -9,6 +9,7 @@ from work.dto.PatientDto import ListPatientDto, SearchPatientDto, EditPatientDto
 
 
 @login_required(login_url='login')
+@allowed_users(allowed_user=['staffs'])
 def list_patient(request):
     patients = work_service_provider.patient_management_service().list_patient()
     context = {
@@ -16,6 +17,17 @@ def list_patient(request):
         'patients': patients
     }
     return render(request, 'patient/viewpatient.html', context)
+
+
+@login_required(login_url='login')
+@allowed_users(allowed_user=['doctor'])
+def list_patient_for_doctor(request):
+    patients = work_service_provider.patient_management_service().list_patient()
+    context = {
+        "title": 'Patients',
+        'patients': patients
+    }
+    return render(request, 'doctor/list_patient_for_doc.html', context)
 
 
 def register_user_post(request):
@@ -31,6 +43,23 @@ def register_user_post(request):
     return render(request, 'patient/Registerpage.html', context)
 
 
+@login_required(login_url='login')
+@allowed_users(allowed_user=['staffs'])
+def register_user_post_staff(request):
+    patient_id = uuid.uuid4()
+    patient_number = str(uuid.uuid4()).replace("-", '')[0:10].upper()
+    context = {
+        'patient_id': patient_id,
+        'patient_number': patient_number
+    }
+    __create_if_post_method(context, request, patient_id, patient_number)
+    if request.method == 'POST' and context['saved']:
+        return redirect("login")
+    return render(request, 'staff/add_patiant_for_staff.html', context)
+
+
+@login_required(login_url='login')
+@allowed_users(allowed_user=['patients'])
 def patient_home(request):
     first_name = request.user.first_name
     last_name = request.user.last_name
@@ -45,6 +74,7 @@ def patient_home(request):
     occupation = request.user.patient.occupation
     phone = request.user.patient.phone
     next_of_kin = request.user.patient.next_of_kin
+    id = request.user.patient.id
     context = {
         'first_name': first_name,
         'last_name': last_name,
@@ -59,6 +89,7 @@ def patient_home(request):
         'occupation': occupation,
         'phone': phone,
         'next_of_kin': next_of_kin,
+        'id': id
     }
     return render(request, 'patient/patientHome.html', context)
 
@@ -87,21 +118,21 @@ def edit_patient(request, patient_id):
     return render(request, "patient/edit_patient.html", context)
 
 
+def search_input(request):
+    context = {
+
+    }
+    return render(request, 'staff/search_input.html', context)
+
+
 @login_required(login_url='login')
 def search_patient(request):
     patient = work_service_provider.patient_management_service().search_patient(request.GET.get('patient_number', None))
     context = {
         'patient': patient,
-        'patient_number': request.POST['patient_number']
+        'patient_number': request.GET['patient_number']
     }
-    return render(request, 'patient/search_patient.html', context)
-
-
-def search_input(request):
-    context = {
-
-    }
-    return render(request, 'patient/searchinput.html', context)
+    return render(request, 'staff/search_patient.html', context)
 
 
 def __set_patient_attributes_form_request_edit(edit_patient_dto, request):

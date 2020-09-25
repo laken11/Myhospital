@@ -51,7 +51,7 @@ class DefaultPatientManagementService(PatientManagementService):
         return self.repository.edit_patient(id, model)
 
     def search_patient(self, patient_number: str) -> SearchPatientDto:
-        return self.repository.search_patient(patient_number=patient_number)
+        return self.repository.search_patient(patient_number)
 
     def patient_details(self, id: int) -> PatientDetailsDto:
         return self.repository.patient_details(id=id)

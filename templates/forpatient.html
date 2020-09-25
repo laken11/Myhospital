@@ -2,25 +2,25 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <title>Patient</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="{% static 'api/assets/css/work.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'api/assets/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
     <script src="{% static 'api/assets/js/jquery-1.12.1.min.js' %}"></script>
     <script src="{% static 'api/assets/js/bootstrap.min.js' %}"></script>
     <script src="{% static 'api/assets/js/popper.min.js' %}"></script>
+    <script src="{% static 'api/assets/js/sweetalert2.min.js' %}"></script>
 </head>
 <body>
 
 <div class="sidenav">
     <p>WELCOME</p>
-    <a href="#about" class="">Home</a>
-    <a href="#services">Services</a>
-    <a href="#clients">Doctors</a>
-    <a href="#contact">Contact</a>
-    <a href="#">Book Appointment</a>
+    <a href="{% url 'patient_home' %}" class="">Home</a>
+    <a href="{% url 'list_doctors' %}">Doctors</a>
+    <a href="{% url 'Create_appointment' %}">Book Appointment</a>
 </div>
 <div class="logout">
-    <a class="btn btn-success" href="{% url 'logout' %}">Log out</a>
+    <a class="btn btn-danger" href="{% url 'logout' %}">Log out</a>
 </div>
 <div class="main">
     {% block content %}

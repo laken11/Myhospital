@@ -2,44 +2,57 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <title>Staff</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="{% static 'api/assets/css/work.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'api/assets/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
     <script src="{% static 'api/assets/js/jquery-1.12.1.min.js' %}"></script>
     <script src="{% static 'api/assets/js/bootstrap.min.js' %}"></script>
     <script src="{% static 'api/assets/js/popper.min.js' %}"></script>
+    <script src="{% static 'api/assets/js/sweetalert2.min.js' %}"></script>
 </head>
 <body>
 
 <div class="sidenav">
-    <p class="btn  border border-success">WELCOME</p>
-    <a href="#about" class="btn">Home</a>
-    <a href="#services" class="btn">Services</a>
+    <p class="">WELCOME</p>
+    <a href="{% url 'staff_home' %}" class="">Home</a>
     <div class="dropdown show">
-        <a class="dropdown-toggle btn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Staff management
+        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Staff
         </a>
 
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <a class="dropdown-item" href="#">Edit staff</a>
-            <a class="dropdown-item" href="#">List staff</a>
-            <a class="dropdown-item" href="#">Add staff</a>
+            <a class="dropdown-item" href="{% url 'staff_search_input' %}">Search</a>
+            <a class="dropdown-item" href="{% url 'list_staff' %}">List</a>
+            <a class="dropdown-item" href="{% url 'register_staff' %}">Add</a>
+            <a class="dropdown-item" href="{% url 'create_doctors' %}">Register doctor</a>
         </div>
     </div>
     <div class="dropdown show">
-        <a class="dropdown-toggle btn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Patient management
+        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Patient
         </a>
 
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <a class="dropdown-item" href="{% url 'list_patients' %}">List patient</a>
-            <a class="dropdown-item" href="#">List appointment</a>
-            <a class="dropdown-item" href="{% url 'create_doctors' %}">Add doctors</a>
+            <a class="dropdown-item" href="{% url 'list_patients' %}">List</a>
+            <a class="dropdown-item" href="{% url 'add_patient_for_staff' %}">Add</a>
+            <a class="dropdown-item" href="{% url 'searchInput' %}">Search</a>
+        </div>
+    </div>
+    <div class="dropdown show">
+        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Appointment
+        </a>
+
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="{% url 'list_appointments' %}">List</a>
+            <a class="dropdown-item" href="{% url 'create_appointment_for_staff' %}">Add</a>
+            <a class="dropdown-item" href="{% url 'search_in' %}">Search</a>
         </div>
     </div>
 </div>
 <div class="logout">
-    <a class="btn btn-success" href="{% url 'logout' %}">Log out</a>
+    <a class="btn btn-danger" href="{% url 'logout' %}">Log out</a>
 </div>
 
 <div class="main">

@@ -70,14 +70,14 @@ class DjangoORMMedicalRecordRepository(MedicalRecordsRepository):
                                                              'treatments',
                                                              'appointment_history',
                                                              'updated_date',
-                                                             'med_ref',
+                                                             'med_number',
                                                              'diagnosis',
                                                              'medications'))
         result: List[ListMedicalRecordsDto] = []
         for medical_record in medical_records:
             item = ListMedicalRecordsDto()
             item.diagnosis = medical_record['diagnosis']
-            item.med_ref = medical_record['med_ref']
+            item.med_number = medical_record['med_number']
             item.updated_date = medical_record['updated_date']
             item.test_required = medical_record['test_required']
             item.appointment_history = medical_record['appointment_history']

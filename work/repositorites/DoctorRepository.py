@@ -1,6 +1,7 @@
 from abc import ABCMeta, abstractmethod
 from typing import List
 from work.models import Doctor
+from django.contrib.auth.models import Group
 from work.dto.DoctorDto import CreateDoctorDto, DoctorDetailsDto, ListDoctorDto, EditDoctorDto, SearchDoctorDto
 from work.dto.CommonDto import SelectOptionDto
 
@@ -48,6 +49,11 @@ class DjangoORMDoctorRepository(DoctorRepository):
         doctor.specialization = model.specialization
         doctor.appointment_schedules = model.appointment_schedule
         doctor.doctor_number = model.doctor_number
+
+        user = doctor.staff.user
+        doctors = Group.objects.get(name="doctor")
+        user.groups.add(doctors)
+
         doctor.save()
 
     def edit_doctor(self, id: int, model: EditDoctorDto):
@@ -68,7 +74,7 @@ class DjangoORMDoctorRepository(DoctorRepository):
             item.id = doctor['id']
             item.staff_first_name = doctor["staff__user__first_name"]
             item.staff_last_name = doctor['staff__user__last_name']
-            item.appointment_schedule = doctor['appoint_schedule']
+            item.appointment_schedule = doctor['appointment_schedules']
             item.specialization = doctor['specialization']
             result.append(item)
         return result

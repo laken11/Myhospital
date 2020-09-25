@@ -5,15 +5,39 @@ from work.service_provider import work_service_provider
 from work.models import Staff
 from work.dto.StaffDto import StaffDetailsDto, SearchStaffDto, ListStaffDto, EditStaffDto, CreateStaffDto
 import uuid
+from work.decorators import allowed_users
 
 
+@login_required(login_url='login')
+@allowed_users(allowed_user=['staffs'])
 def staff_home(request):
+    first_name = request.user.first_name
+    last_name = request.user.last_name
+    email = request.user.email
+    phone = request.user.staff.phone
+    job_title = request.user.staff.job_title
+    year_of_employment = request.user.staff.year_of_employment
+    staff_number = request.user.staff.staff_number
+    level = request.user.staff.level
+    date_of_birth = request.user.staff.date_of_birth
+    id = request.user.staff.id
     context = {
-
+        'first_name': first_name,
+        'last_name': last_name,
+        'email': email,
+        'phone': phone,
+        'job_title': job_title,
+        'year_of_employment': year_of_employment,
+        'staff_number': staff_number,
+        'level': level,
+        'date_of_birth': date_of_birth,
+        'id': id
     }
-    return render(request, 'forstaff.html', context)
+    return render(request, 'staff/staff_home.html', context)
 
 
+@login_required(login_url='login')
+@allowed_users(allowed_user=['staffs'])
 def register_staff(request):
     staff_id = uuid.uuid4()
     context = {
@@ -26,6 +50,8 @@ def register_staff(request):
     return render(request, 'staff/register_staff.html', context)
 
 
+@login_required(login_url='login')
+@allowed_users(allowed_user=['staffs'])
 def list_staff(request):
     staffs = work_service_provider.staff_management_service().list_staff()
     context = {
@@ -35,6 +61,8 @@ def list_staff(request):
     return render(request, 'staff/staff_list.html', context)
 
 
+@login_required(login_url='login')
+@allowed_users(allowed_user=['staffs'])
 def staff_details(request, id):
     staff = __get_staff_details_or_raise_404(id)
     context = {
@@ -44,6 +72,8 @@ def staff_details(request, id):
     return render(request, 'staff/staff_details.html', context)
 
 
+@login_required(login_url='login')
+@allowed_users(allowed_user=['staffs'])
 def edit_staff(request, id: int):
     staff_detail_dto = __get_staff_details_or_raise_404(id)
     context = {
@@ -51,11 +81,30 @@ def edit_staff(request, id: int):
         'id': id,
         'title': 'Edit flight'
     }
-    new_staff_dto = __edit_if_post_method(request, id, context)
+    new_staff_dto = __edit_if_post_method(context, request, id)
     if new_staff_dto is not None:
         context['staff'] = new_staff_dto
     return render(request, 'staff/edit_staff.html', context)
 
+
+@login_required(login_url='login')
+@allowed_users(allowed_user=['staffs'])
+def search_input(request):
+    context = {
+
+    }
+    return render(request, 'staff/search.html', context)
+
+
+@login_required(login_url='login')
+@allowed_users(allowed_user=['staffs'])
+def search_staff(request):
+    staff = work_service_provider.staff_management_service().search_staff(request.GET.get("staff_number", None))
+    context = {
+        'staff': staff,
+        'staff_number': request.GET['staff_number']
+    }
+    return render(request, 'staff/search_result.html', context)
 
 
 def __get_staff_details_or_raise_404(id):
@@ -82,7 +131,7 @@ def __get_staff_attribute_from_request_edit(request, id: int):
     return edit_staff_dto
 
 
-def __edit_if_post_method(request, id: int, context):
+def __edit_if_post_method(context, request: HttpRequest, id: int):
     if request.method == 'POST':
         try:
             staff = __get_staff_attribute_from_request_edit(request, id)
@@ -95,6 +144,9 @@ def __edit_if_post_method(request, id: int, context):
 
 
 def __set_staff_attribute_from_request(create_staff_dto, request):
+    create_staff_dto.username = request.POST['username']
+    create_staff_dto.password = request.POST['password']
+    create_staff_dto.email = request.POST['email']
     create_staff_dto.phone = request.POST['phone']
     create_staff_dto.staff_id = request.POST['staff_id']
     create_staff_dto.address = request.POST['address']
@@ -104,8 +156,6 @@ def __set_staff_attribute_from_request(create_staff_dto, request):
     create_staff_dto.level = request.POST['level']
     create_staff_dto.first_name = request.POST['first_name']
     create_staff_dto.last_name = request.POST['last_name']
-    create_staff_dto.username = request.POST['username']
-    create_staff_dto.password = request.POST['password']
     create_staff_dto.staff_number = request.POST['staff_number']
 
 
