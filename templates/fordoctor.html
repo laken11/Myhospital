@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{% static 'api/assets/css/work.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'api/assets/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+    <script src="{% static 'api/assets/js/jquery-1.12.1.min.js' %}"></script>
+    <script src="{% static 'api/assets/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'api/assets/js/popper.min.js' %}"></script>
+    <script src="{% static 'api/assets/js/sweetalert2.min.js' %}"></script>
+</head>
+<body>
+
+<div class="sidenav">
+    <p class="">WELCOME</p>
+    <a href="{% url 'doctor_home' %}" class="">Home</a>
+    <a href="#services" class="">Services</a>
+    <div class="dropdown show">
+        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Patient
+        </a>
+
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="{% url 'list_for_doctor' %}">List</a>
+        </div>
+    </div>
+    <div class="dropdown show">
+        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Medical record
+        </a>
+
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="{% url 'list_medical_record' %}">List</a>
+            <a class="dropdown-item" href="{% url 'create_medical_record' %}">add</a>
+{#            <a class="dropdown-item" href="{% url '' %}">search</a>#}
+        </div>
+    </div>
+    <div class="dropdown show">
+        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Appointment
+        </a>
+
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="{% url 'list_appointment_for_doctor' %}">List</a>
+            <a class="dropdown-item" href="{% url 'appointment_input' %}">search</a>
+        </div>
+    </div>
+</div>
+<div class="logout">
+    <a class="btn btn-danger" href="{% url 'logout' %}">Log out</a>
+</div>
+
+<div class="main">
+    <div class ='headn'>
+        <h2 class="text-info bg-warning"></h2>
+    </div>
+    {% block content %}
+    {% endblock %}
+</div>
+<script src="{% static 'api/assets/js/jquery-1.12.1.min.js' %}"></script>
+<script src="{% static 'api/assets/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'api/assets/js/popper.min.js' %}"></script>
+</body>
+</html>
