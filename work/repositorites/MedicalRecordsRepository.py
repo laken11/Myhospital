@@ -44,6 +44,7 @@ class DjangoORMMedicalRecordRepository(MedicalRecordsRepository):
         medical_record.treatments = model.treatments
         medical_record.appointment_history = model.appointment_history
         medical_record.med_number = model.med_number
+        medical_record.medications = model.medications
         medical_record.save()
 
     def edit_medical_record(self, id: int, model: EditMedicalRecordsDto):
@@ -86,6 +87,7 @@ class DjangoORMMedicalRecordRepository(MedicalRecordsRepository):
             item.Patient_user_first_name = medical_record['patient__user__first_name']
             item.Patient_user_last_name = medical_record['patient__user__last_name']
             item.medications = medical_record['medications']
+            item.treatment = medical_record['treatments']
             item.id = medical_record['id']
             result.append(item)
         return result

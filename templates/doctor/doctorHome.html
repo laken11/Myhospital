@@ -1,4 +1,23 @@
 {% extends 'fordoctor.html' %}
 {% block content %}
     <h1 class="text-info text-heading text-center">WELCOME</h1>
+    <h4 class="text-info text-heading text-center">Your Doctors Number is: {{ doctors_number }}</h4>
+    <p>At All care we provide quality health care service to our patients anytime. The health of
+        our patients is our major priority as we have staffs that are dedicated to working in
+        providing a good service to anyone at our hospital. We have several doctors the are
+        specialist in various fields</p>
+    <div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <p>Doctors Profile</p>
+                </div>
+                <div class="card-body">
+                    <p>{{ job }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
 {% endblock %}

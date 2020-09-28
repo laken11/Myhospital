@@ -53,7 +53,6 @@ class DjangoOMStaffRepository(StaffRepository):
         user.last_name = model.last_name
         user.first_name = model.first_name
         user.save()
-        staff.user = user
         staff.save()
 
     def edit_staff(self, model: EditStaffDto, id):

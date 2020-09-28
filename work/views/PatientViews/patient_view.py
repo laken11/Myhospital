@@ -135,6 +135,19 @@ def search_patient(request):
     return render(request, 'staff/search_patient.html', context)
 
 
+def edit_patient_for_staff(request, patient_id: int):
+    patient_details_dto = __get_patient_details_dto_or_rise_404(patient_id)
+    context = {
+        'title': f'Edit patient {patient_details_dto.user_first_name}',
+        'patient_id': patient_id,
+        'patient': patient_details_dto
+    }
+    new_patient_dto = __edit_if_post_method(context, request, patient_id)
+    if new_patient_dto is not None:
+        context["patient"] = new_patient_dto
+    return render(request, "staff/edit_patient_for_staff.html", context)
+
+
 def __set_patient_attributes_form_request_edit(edit_patient_dto, request):
     edit_patient_dto.blood_group = request.POST['blood_group']
     edit_patient_dto.phone = request.POST['phone']

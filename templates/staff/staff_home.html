@@ -1,13 +1,16 @@
 {% extends 'forstaff.html' %}
 {% block content %}
-    <div class="container">
-        <h1 class="text-center text-heading ">WELCOME</h1>
-        <h3 class="text-center"> {{ first_name }}</h3>
-        <h2 class="text-info"> Your Staff Number is: {{ staff_number }}</h2>
-        <p> Your Staff number is very important as it is unique to you and are used for various transactions within
-            the hospital </p>
-    </div>
-    <div class="container">
+    <div class="container line mx-auto">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="text-center text-heading ">WELCOME</h1>
+                <h3 class="text-center"> {{ first_name }}</h3>
+                <h2 class="text-info"> Your Staff Number is: {{ staff_number }}</h2>
+                <p> Your Staff number is very important as it is unique to you and are used for various transactions
+                    within
+                    the hospital </p>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="card">

@@ -33,7 +33,7 @@ def create_medical_record(request):
     }
     __create_if_post_method(request, context)
     if request.method == 'POST' and context['saved']:
-        return redirect('')
+        return redirect('doctor_home')
     return render(request, 'medical_record/create_med_red.html', context)
 
 
