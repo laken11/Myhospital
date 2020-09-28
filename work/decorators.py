@@ -16,13 +16,15 @@ def unauthenticated_user(view_function):
     return wrapper_function
 
 
-def allowed_users(allowed_user=[]):
+def allowed_users(allowed_user=None):
+    if allowed_user is None:
+        allowed_user = []
+
     def decorator(view_function):
         def wrapper_function(request, *args, **kwargs):
             group = None
             if request.user.groups.exists():
                 group = request.user.groups.all()[0].name
-                print(group)
             if group in allowed_user:
                 return view_function(request, *args, **kwargs)
             else:
