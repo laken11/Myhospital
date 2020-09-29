@@ -1,0 +1,48 @@
+{% extends 'forstaff.html' %}
+{% block content %}
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-md-10">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Doctor Registration</h2>
+                    </div>
+                    <form action="{% url 'create_doctors' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="staff_id" class="form-check-label">Staff</label>
+                                <select name="staff_id" class="form-control" id="staff_id" type="text">
+                                    {% for s in staff %}
+                                        <option label="{{ s.text }}" value="{{ s.id }}">{{ s.text }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="specialization" class="form-check-label">Specialization</label>
+                                    <input name="specialization" class="form-control" type="text" id="specialization"
+                                           value="{{ doctor.specialization }}">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="appointment_schedule" class="form-check-label">Appointment
+                                        schedule</label>
+                                    <input name="appointment_schedule" class="form-control" type="text"
+                                           id="appointment_schedule" value="{{ doctor.appointment_schedule }}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="doctor_number" class="form-check-label">Doctor Number</label>
+                                <input name="doctor_number" class="form-control" type="text" id="doctor_number"
+                                       value="{{ doctor_number }}" readonly>
+                            </div>
+                            <div class="card-footer">
+                                <button class="btn btn-success" type="submit">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

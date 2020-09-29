@@ -1,0 +1,71 @@
+{% extends 'forpatient.html' %}
+{% block content %}
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-md-10">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Appointment Registration</h2>
+                    </div>
+                    <div class="card-body">
+                        <form action="{% url 'Create_appointment' %}" method="POST">
+                        {% if saved is False %}
+                            <script>
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Sorry',
+                                    text: 'An error occurred while trying create appointment'
+                                });
+                            </script>
+                        {% elif saved is True %}
+                            <script>
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Congratulations!',
+                                    text: 'Successfully Scheduled'
+                                });
+                            </script>
+                        {% endif %}
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="doctor_id" class="form-check-label">Doctor</label>
+                                <select name="doctor_id" class="form-control" id="doctor_id" type="text">
+                                    {% for d in doctors %}
+                                        <option label="{{ d.text }}" value="{{ d.id }}">{{ d.text }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-check-label" for="patient_id">Patient: {{ patient_number }}</label>
+                                <input class="form-control" name="patient_id" id="patient_id" value="{{ patient_id }}"
+                                       readonly>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="appointment_datetime" class="form-check-label">Appointment date</label>
+                                    <input name="appointment_datetime" class="form-control " type="date"
+                                           id="appointment_datetime"
+                                           value="{{ appointment.appointment_datetime }}">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="appointment_number" class="form-check-label">Appointment Number</label>
+                                    <input name="appointment_number" class="form-control" type="text"
+                                           id="appointment_number" value="{{ appointment_number }}" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="appointment_reference" class="form-check-label">Appointment
+                                    Reference</label>
+                                <input name="appointment_reference" class="form-control" id="appointment_reference"
+                                       readonly value="{{ appointment_reference }}">
+                            </div>
+                            <div class="card-footer">
+                                <button class="btn btn-success" type="submit">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

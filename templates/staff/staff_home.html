@@ -1,0 +1,60 @@
+{% extends 'forstaff.html' %}
+{% block content %}
+    <div class="container line mx-auto">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="text-center text-heading ">WELCOME</h1>
+                <h3 class="text-center"> {{ first_name }}</h3>
+                <h2 class="text-info"> Your Staff Number is: {{ staff_number }}</h2>
+                <p> Your Staff number is very important as it is unique to you and are used for various transactions
+                    within
+                    the hospital </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="text-center text-truncate">Profile</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label class="form-check-label">Name</label>
+                                <p class="form-control">{{ first_name }} {{ last_name }}</p>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="form-check-label">Phone</label>
+                                <p class="form-control">{{ phone }}</p>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label class="form-check-label">Email</label>
+                                <p class="form-control">{{ email }}</p>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="form-check-label">Job title</label>
+                                <p class="form-control">{{ job_title }}</p>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label class="form-check-label">Year of employment</label>
+                                <p class="form-control">{{ year_of_employment }}</p>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="form-check-label">Level</label>
+                                <p class="form-control">{{ level }}</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-check-label">Date Of Birth</label>
+                            <p class="form-control">{{ date_of_birth }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

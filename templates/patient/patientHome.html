@@ -1,0 +1,76 @@
+{% extends 'forpatient.html' %}
+{% block content %}
+    <div class="container">
+        <h1 class="text-center text-heading ">WELCOME</h1>
+        <h3 class="text-center">{{ first_name }}</h3>
+        <h2 class="text-info"> Your Patient Number is: {{ patient_number }}</h2>
+        <p> Your patient number is very important as it is unique to you and are used for various transactions within
+            the hospital </p>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="text-center text-truncate">Profile</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="" class="form-check-label">Name:</label>
+                                <p class="form-control">{{ first_name }} {{ last_name }}</p>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="form-check-label">Email</label>
+                                <p class="form-control">{{ email }}</p>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="" class="form-check-label">Blood group</label>
+                                <p class="form-control">{{ blood_group }}</p>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="" class="form-check-label">Genotype</label>
+                                <p class="form-control">{{ genotype }}</p>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="group col-md-6">
+                                <label class="form-check-label">Marital status</label>
+                                <p class="form-control">{{ marital_status }}</p>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="form-check-label">Next of kin</label>
+                                <p class="form-control">{{ next_of_kin }}</p>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label class="form-check-label">Gender</label>
+                                <p class="form-control">{{ gender }}</p>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="form-check-label">Date of birth</label>
+                                <p class="form-control">{{ date_of_birth }}</p>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label class="form-check-label">Occupation</label>
+                                <p class="form-control">{{ occupation }}</p>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="form-check-label">Address</label>
+                                <p class="form-control">{{ address }}</p>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <a href="{% url 'edit_patient' id %}" class="btn btn-warning float-right">Edit</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'forstaff.html' %}
+{% block content %}
+    {% if patient %}
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-md-12">
+                <h3 class="table-head">Patient</h3>
+                <div class="table table-hover table-responsive">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>First name</th>
+                            <th>Last name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Address</th>
+                            <th>Gender</th>
+                            <th>Blood-group</th>
+                            <th>Marital status</th>
+                            <th>Genotype</th>
+                            <th>Next of kin</th>
+                            <th>Occupation</th>
+                            <th>Patient Number</th>
+                            <th>Patient ID</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>{{ patient.user_first_name }}</td>
+                            <td>{{ patient.user_last_name }}</td>
+                            <td>{{ patient.user_email }}</td>
+                            <td>{{ patient.phone }}</td>
+                            <td>{{ patient.address }}</td>
+                            <td>{{ patient.gender }}</td>
+                            <td>{{ patient.blood_group }}</td>
+                            <td>{{ patient.marital_status }}</td>
+                            <td>{{ patient.genotype }}</td>
+                            <td>{{ patient.next_of_kin }}</td>
+                            <td>{{ patient.occupation }}</td>
+                            <td>{{ patient.patient_number }}</td>
+                            <td>{{ patient.patient_id }}</td>
+                            <td>
+                                <div class="btn-group">
+                                    <a href="{% url 'details' patient.id %}"
+                                       class="btn btn-success">Details</a>
+                                    <a href="{% url 'edit_patient' patient.id %}"
+                                       class="btn btn-success">Edit</a>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'fordoctor.html' %}
+{% block content %}
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Doctor list</h2>
+                    </div>
+                    <div class="table table-hover table-responsive table-bordered">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>Patient</th>
+                                <th>Doctor</th>
+                                <th>appointment History</th>
+                                <th>Test Required</th>
+                                <th>Treatment</th>
+                                <th>Diagnosis</th>
+                                <th>Updated time</th>
+                                <th>Medications</th>
+                                <th>Med number</th>
+                            </tr>
+                            </thead>
+                            {% for medical_record in medical_records %}
+                                <tbody>
+                                <tr>
+                                    <td>{{ medical_record.Patient_user_first_name }} {{ medical_record.Patient_user_last_name }}</td>
+                                    <td>{{ medical_record.doctor_user_first_name }} {{ medical_record.doctor_user_last_name }}</td>
+                                    <td>{{ medical_record.appointment_history }}</td>
+                                    <td>{{ medical_record.test_required }}</td>
+                                    <td>{{ medical_record.treatment }}</td>
+                                    <td>{{ medical_record.diagnosis }}</td>
+                                    <td>{{ medical_record.updated_date }}</td>
+                                    <td>{{ medical_record.medication }}</td>
+                                    <td>{{ medical_record.med_number }}</td>
+                                    <td>
+                                        {#                                        <div class="btn-row">#}
+                                        {#                                            <a href="{% url '' %}" class="btn btn-success btn-group">Details</a>#}
+                                        {#                                            <a href="{% url '' %}" class="btn btn-success btn-group">Edit</a>#}
+                                        {#                                        </div>#}
+                                    </td>
+                                </tr>
+                                </tbody>
+                                </table>
+                            {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

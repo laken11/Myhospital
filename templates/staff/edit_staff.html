@@ -1,0 +1,74 @@
+{% extends 'forstaff.html' %}
+{% block content %}
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-md-10">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Staff Edit</h2>
+                    </div>
+                    <div class="card-body">
+                        <form action="{% url 'edit staff' id=staff.id %}" method="POST">
+                            {% if saved is False %}
+                                <script>
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Sorry',
+                                        text: 'An error occurred while trying to save the patient'
+                                    });
+                                </script>
+                            {% elif saved is True %}
+                                <script>
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Congratulations!',
+                                        text: 'Change Successfully Saved'
+                                    });
+                                </script>
+                            {% endif %}
+                            {% csrf_token %}
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="phone" class="">Phone</label>
+                                    <input name="phone" class="form-control" type="text" id="phone"
+                                           value="{{ staff.phone }}">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="date_of_birth" class="">Date of birth</label>
+                                    <input name="date_of_birth" class="form-control" type="date" id="date_of_birth"
+                                           value="{{ staff.date_of_birth }}">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="address" class="form-check-label">Address</label>
+                                    <input name="address" class="form-control" id="address" value="{{ staff.address }}"
+                                           type="text">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="year_of_employment" class="form-check-label">Year of employment</label>
+                                    <input name="year_of_employment" id="year_of_employment" type="date"
+                                           value="{{ staff.year_of_employment }}" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="job_title" class="form-check-label">Job title</label>
+                                    <input name="job_title" class="form-control" id="job_title" type="text"
+                                           value="{{ staff.job_title }}">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="level" class="form-check-label">Level</label>
+                                    <input name="level" class="form-control" id="level" value="{{ staff.level }}">
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-success">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

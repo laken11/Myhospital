@@ -1,0 +1,26 @@
+{% extends 'forstaff.html' %}
+{% block content %}
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-md-10">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Enter Appointment Number</h4>
+                    </div>
+                    <div class="card-body">
+                        <form action="{% url 'search_out' %}" method="GET">
+                            <div class="form-group">
+                                <label for="appointment_number" class="form-check-label">Appointment Number:</label>
+                                <input name="appointment_number" class="form-control" id="appointment_number"
+                                       value="{{ appointment_number }}" type="text">
+                            </div>
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-success">Search</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

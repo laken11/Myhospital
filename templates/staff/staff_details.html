@@ -1,0 +1,86 @@
+{% extends 'forstaff.html' %}
+{% block content %}
+    <div class="container">
+        <div class="row mt_130">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Staff {{ staff.user_first_name }} {{ staff_last_name }}</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="first_name" class="">First name</label>
+                                <label class="form-control" id="first_name" type="text"
+                                >value="{{ staff.first_name }}"</label>
+                            </div>
+                            <div class="form-group">
+                                <label for="last_name" class="">Last Name</label>
+                                <label class="form-control" type="text" id="last_name"
+                                > value="{{ staff.last_name }}"</label>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="username" class="">Username</label>
+                                <label class="form-control" type="text" id="username"
+                                >value="{{ staff.username }}"</label>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone" class="">Phone</label>
+                                <label class="form-control" type="text" id="phone"
+                                >value="{{ staff.phone }}"</label>
+                            </div>
+                            <div class="form-group">
+                                <label for="email" class="">Email</label>
+                                <label class="form-control" id="email" type="email"
+                                >value="{{ staff.email }}"</label>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="address" class="">Address</label>
+                                <label class="form-control" id="address"
+                                       type="text">value="{{ staff.address }}"</label>
+                            </div>
+                            <div class="form-group">
+                                <label for="year_of_employment" class="">Year of employment</label>
+                                <label id="year_of_employment" type="date"
+                                >value="{{ value.year_of_employment }}"</label>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="job_title" class="">Job title</label>
+                                <label class="form-control" id="job_title" type="text"
+                                >value="{{ staff.job_title }}"</label>
+                            </div>
+                            <div class="form-group">
+                                <label for="level" class="">Level</label>
+                                <label class="form-control" id="level">value="{{ staff.level }}"</label>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="date_of_birth" class="">Date of birth</label>
+                                <label class="form-control" type="date" id="date_of_birth"
+                                >value="{{ staff.date_of_birth }}"</label>
+                            </div>
+                            <div class="form-group">
+                                <label for="staff_number" class="">Staff Number</label>
+                                <label class="form-control disabled" id="staff_number"
+                                >{{ staff.staff_number }}</label>
+                            </div>
+                        </div>
+                        <div class="from-group">
+                            <label for="staff_id" class="form-check-label">Staff ID</label>
+                            <label class="form-control" id="staff_id">{{ staff.staff_id }}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

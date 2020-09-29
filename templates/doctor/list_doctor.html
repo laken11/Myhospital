@@ -1,0 +1,39 @@
+{% extends 'forpatient.html' %}
+{% block content %}
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-md-10">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Doctor list</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="table table-hover table-responsive">
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th>First name</th>
+                                    <th>Last name</th>
+                                    <th>Specialization</th>
+                                    <th>Appointment schedule</th>
+                                </tr>
+                                </thead>
+                                {% for doctor in doctors %}
+                                    <tbody>
+                                    <tr>
+                                        <td>{{ doctor.staff_first_name }}</td>
+                                        <td>{{ doctor.staff_last_name }}</td>
+                                        <td>{{ doctor.specialization }}</td>
+                                        <td>{{ doctor.appointment_schedule }}</td>
+                                    </tr>
+                                    </tbody>
+                                {% endfor %}
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

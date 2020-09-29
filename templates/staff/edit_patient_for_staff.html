@@ -1,0 +1,94 @@
+{% extends 'forstaff.html' %}
+{% block content %}
+    <div class="container">
+        <div class="row mt-5 ml-2">
+            <div class="col-md-10">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">{{ titlle }}</h3>
+                    </div>
+                    <div class="card-body">
+                        <form method="POST" action="{% url 'edit_patient_for_staff' patient_id=patient.id %}">
+                            {% if saved is False %}
+                                <script>
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Sorry',
+                                        text: 'An error occurred while trying to save the patient'
+                                    });
+                                </script>
+                            {% elif saved is True %}
+                                <script>
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Congratulations!',
+                                        text: 'Change Successfully Saved'
+                                    });
+                                </script>
+                            {% endif %}
+                            {% csrf_token %}
+                            <div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="phone" class="form-check-label">Phone:</label>
+                                        <input name="phone" class="form-control" type="tel" value="{{ patient.phone }}"
+                                               id="phone">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="occupation" class="form-check-label">Occupation:</label>
+                                        <input name="occupation" class="form-control" type="text"
+                                               value="{{ patient.occupation }}" id="occupation">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="marital_status" class="form-check-label">Marital status:</label>
+                                        <input name="marital_status" class="form-control" id="marital_status"
+                                               value="{{ patient.marital_status }}" type="text">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="next_of_kin" class="form-check-label">Next_of_kin</label>
+                                        <input name="next_of_kin" class="form-control" id="next_of_kin"
+                                               value="{{ patient.next_of_kin }}" type="text">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="date_of_birth" class="form-check-label">Date Of Birth:</label>
+                                        <input name="date_of_birth" class="form-control"
+                                               value="{{ patient.date_of_birth }}" id="date_of_birth" type="">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="gender" class="form-check-label">Gender:</label>
+                                        <input name="gender" value="{{ patient.gender }}" id="gender" type="text"
+                                               class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-groupcol-md-6">
+                                        <label for="blood_group" class="form-check-label">Blood Group</label>
+                                        <input name="blood_group" class="form-control" value="{{ patient.blood_group }}"
+                                               id="blood_group" type="text">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="genotype" class="form-check-label">Genotype:</label>
+                                        <input name="genotype" class="form-control" value="{{ patient.genotype }}"
+                                               id="genotype" type="text">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="address" class="form-check-label">Genotype:</label>
+                                    <input name="address" class="form-control" value="{{ patient.address }}"
+                                           id="address" type="text">
+                                </div>
+                                <div class="card-footer">
+                                    <button type="submit" class="btn btn-success">Save Changes</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

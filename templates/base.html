@@ -1,0 +1,99 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>All Care</title>
+    <link rel="icon" href="{% static 'api/assets/img/favicon.png' %}">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'api/assets/css/bootstrap.min.css' %}">
+    <!-- animate CSS -->
+    <link rel="stylesheet" href="{% static 'api/assets/css/animate.css' %}">
+    <!-- owl carousel CSS -->
+    <link rel="stylesheet" href="{% static 'api/assets/css/owl.carousel.min.css' %}">
+    <!-- themify CSS -->
+    <link rel="stylesheet" href="{% static 'api/assets/css/themify-icons.css' %}">
+    <!-- flaticon CSS -->
+    <link rel="stylesheet" href="{% static 'api/assets/css/flaticon.css' %}">
+    <!-- magnific popup CSS -->
+    <link rel="stylesheet" href="{% static 'api/assets/css/magnific-popup.css' %}">
+    <!-- nice select CSS -->
+    <link rel="stylesheet" href="{% static 'api/assets/css/nice-select.css' %}">
+    <!-- swiper CSS -->
+    <link rel="stylesheet" href="{% static 'api/assets/css/slick.css' %}">
+    <!-- style CSS -->
+    <link rel="stylesheet" href="{% static 'api/assets/css/style.css' %}">
+    <script src="{% static 'api/assets/js/sweetalert2.min.js' %}"></script>
+</head>
+
+<body>
+<!--::header part start::-->
+<header class="main_menu home_menu">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-12">
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <a class="navbar-brand" href="{% url 'index' %}"> <img
+                            src="{% static 'api/assets/img/Free_Sample_By_Wix(1).png' %}" alt="logo"> </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse main-menu-item justify-content-center"
+                         id="navbarSupportedContent">
+                        <ul class="navbar-nav align-items-center">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="{% url 'index' %}">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'about' %}">about</a>
+                            </li>
+                            <li>
+                                <a class="nav-link" href="{% url 'login_get' %}">Login in</a>
+                            </li>
+                            <li>
+                                <a class="nav-link" href="{% url 'register' %}">Register!</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <a class="btn_2 d-none d-lg-block" href="#">HOT LINE- 07038386817</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Header part end-->
+{% block content %}
+{% endblock %}
+<!--footer part start-->
+<footer class="fixed-bottom" style="background-color: #ffffff">
+    <p class="text-center text-dark">Nites &copy; 2020</p>
+</footer>
+<!-- footer part end!-->
+
+<!-- jquery plugins here-->
+
+<script src="{% static 'api/assets/js/jquery-1.12.1.min.js' %}"></script>
+<!-- popper js -->
+<script src="{% static 'api/assets/js/popper.min.js' %}"></script>
+<!-- bootstrap js -->
+<script src="{% static 'api/assets/js/bootstrap.min.js' %}"></script>
+<!-- owl carousel js -->
+<script src="{% static 'api/assets/js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'api/assets/js/jquery.nice-select.min.js' %}"></script>
+<!-- contact js -->
+<script src="{% static 'api/assets/js/jquery.ajaxchimp.min.js' %}"></script>
+<script src="{% static 'api/assets/js/jquery.form.js' %}"></script>
+<script src="{% static 'api/assets/js/jquery.validate.min.js' %}"></script>
+<script src="{% static 'api/assets/js/mail-script.js' %}"></script>
+<script src="{% static 'api/assets/js/contact.js' %}"></script>
+<!-- custom js -->
+<script src="{% static 'api/assets/js/custom.js' %}"></script>
+
+</body>
+</html>
