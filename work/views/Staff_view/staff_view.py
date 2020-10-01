@@ -8,7 +8,7 @@ import uuid
 from work.decorators import allowed_users
 
 
-@login_required(login_url='login')
+@login_required(login_url='login_get')
 @allowed_users(allowed_user=['staffs'])
 def staff_home(request):
     first_name = request.user.first_name
@@ -36,7 +36,7 @@ def staff_home(request):
     return render(request, 'staff/staff_home.html', context)
 
 
-@login_required(login_url='login')
+@login_required(login_url='login_get')
 @allowed_users(allowed_user=['staffs'])
 def register_staff(request):
     staff_id = uuid.uuid4()
@@ -50,7 +50,7 @@ def register_staff(request):
     return render(request, 'staff/register_staff.html', context)
 
 
-@login_required(login_url='login')
+@login_required(login_url='login_get')
 @allowed_users(allowed_user=['staffs'])
 def list_staff(request):
     staffs = work_service_provider.staff_management_service().list_staff()
@@ -61,7 +61,7 @@ def list_staff(request):
     return render(request, 'staff/staff_list.html', context)
 
 
-@login_required(login_url='login')
+@login_required(login_url='login_get')
 @allowed_users(allowed_user=['staffs'])
 def staff_details(request, id):
     staff = __get_staff_details_or_raise_404(id)
@@ -72,7 +72,7 @@ def staff_details(request, id):
     return render(request, 'staff/staff_details.html', context)
 
 
-@login_required(login_url='login')
+@login_required(login_url='login_get')
 @allowed_users(allowed_user=['staffs'])
 def edit_staff(request, id: int):
     staff_detail_dto = __get_staff_details_or_raise_404(id)
@@ -87,7 +87,7 @@ def edit_staff(request, id: int):
     return render(request, 'staff/edit_staff.html', context)
 
 
-@login_required(login_url='login')
+@login_required(login_url='login_get')
 @allowed_users(allowed_user=['staffs'])
 def search_input(request):
     context = {
@@ -96,7 +96,7 @@ def search_input(request):
     return render(request, 'staff/search.html', context)
 
 
-@login_required(login_url='login')
+@login_required(login_url='login_get')
 @allowed_users(allowed_user=['staffs'])
 def search_staff(request):
     staff = work_service_provider.staff_management_service().search_staff(request.GET.get("staff_number", None))
