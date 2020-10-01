@@ -10,7 +10,7 @@ from django.shortcuts import render, redirect
 from django.http import Http404, HttpRequest, HttpResponse
 
 
-@login_required(login_url='login')
+@login_required(login_url='login_get')
 def list_doctors(request):
     doctors = work_service_provider.doctor_management_service().list_doctors()
     context = {
@@ -20,7 +20,7 @@ def list_doctors(request):
     return render(request, 'doctor/list_doctor.html', context)
 
 
-@login_required(login_url='login')
+@login_required(login_url='login_get')
 @allowed_users(allowed_user=['staffs'])
 def doctor_details(request, doctor_id):
     doctor = __get_doctor_details_or_raise_404(doctor_id)
@@ -31,7 +31,7 @@ def doctor_details(request, doctor_id):
     return render(request, '', context)
 
 
-@login_required(login_url='login')
+@login_required(login_url='login_get')
 @allowed_users(allowed_user=['doctor'])
 def doctor_home(request):
     job_title = request.user.staff.job_title
@@ -41,7 +41,7 @@ def doctor_home(request):
     return render(request, 'doctor/doctorHome.html', context)
 
 
-@login_required(login_url='login')
+@login_required(login_url='login_get')
 @allowed_users(allowed_user=['staffs'])
 def create_doctor(request):
     staff = work_service_provider.staff_management_service().get_all_for_select_list()
