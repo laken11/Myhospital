@@ -9,7 +9,7 @@ from work.service_provider import work_service_provider
 from work.decorators import allowed_users
 
 
-@login_required(login_url='login')
+@login_required(login_url='login_get')
 def list_appointments(request):
     appointments = work_service_provider.appointment_management_service().list_appointment()
     context = {
@@ -18,7 +18,7 @@ def list_appointments(request):
     return render(request, 'appointment/list_appointment.html', context)
 
 
-@login_required(login_url='login')
+@login_required(login_url='login_get')
 def list_appointments_doctor(request):
     appointments = work_service_provider.appointment_management_service().list_appointment()
     context = {
@@ -27,7 +27,7 @@ def list_appointments_doctor(request):
     return render(request, 'doctor/appointment_for_doctor.html', context)
 
 
-@login_required(login_url='login')
+@login_required(login_url='login_get')
 def search_appointment(request):
     appointment = work_service_provider.appointment_management_service().search_appointment(
         request.GET.get("appointment_number", None))
@@ -55,7 +55,7 @@ def search_appointment_staff(request):
     return render(request, 'staff/appointment_output.html', context)
 
 
-@login_required(login_url='login')
+@login_required(login_url='login_get')
 def search_input(request):
     context = {
 
@@ -63,7 +63,7 @@ def search_input(request):
     return render(request, 'appointment/appointment_input.html', context)
 
 
-@login_required(login_url='login')
+@login_required(login_url='login_get')
 def create_appointment(request):
     doctors = work_service_provider.doctor_management_service().get_all_for_select_list_doc()
     patient_id = request.user.patient.id
@@ -81,7 +81,7 @@ def create_appointment(request):
     return render(request, 'appointment/create_appointment.html', context)
 
 
-@login_required(login_url='login')
+@login_required(login_url='login_get')
 @allowed_users(allowed_user=['staffs'])
 def create_appointment_for_staff(request):
     patients = work_service_provider.patient_management_service().get_all_for_select_list()
