@@ -8,7 +8,7 @@ from work.models import Patient
 from work.dto.PatientDto import ListPatientDto, SearchPatientDto, EditPatientDto, CreatePatientDto, PatientDetailsDto
 
 
-@login_required(login_url='login')
+@login_required(login_url='login_get')
 @allowed_users(allowed_user=['staffs'])
 def list_patient(request):
     patients = work_service_provider.patient_management_service().list_patient()
@@ -19,7 +19,7 @@ def list_patient(request):
     return render(request, 'patient/viewpatient.html', context)
 
 
-@login_required(login_url='login')
+@login_required(login_url='login_get')
 @allowed_users(allowed_user=['doctor'])
 def list_patient_for_doctor(request):
     patients = work_service_provider.patient_management_service().list_patient()
@@ -43,7 +43,7 @@ def register_user_post(request):
     return render(request, 'patient/Registerpage.html', context)
 
 
-@login_required(login_url='login')
+@login_required(login_url='login_get')
 @allowed_users(allowed_user=['staffs'])
 def register_user_post_staff(request):
     patient_id = uuid.uuid4()
@@ -58,7 +58,7 @@ def register_user_post_staff(request):
     return render(request, 'staff/add_patiant_for_staff.html', context)
 
 
-@login_required(login_url='login')
+@login_required(login_url='login_get')
 @allowed_users(allowed_user=['patients'])
 def patient_home(request):
     first_name = request.user.first_name
@@ -94,7 +94,7 @@ def patient_home(request):
     return render(request, 'patient/patientHome.html', context)
 
 
-@login_required(login_url='login')
+@login_required(login_url='login_get')
 def patient_details(request, patient_id):
     patient = __get_patient_details_dto_or_rise_404(patient_id)
     context = {
@@ -104,7 +104,7 @@ def patient_details(request, patient_id):
     return render(request, 'patient/details_patient.html', context)
 
 
-@login_required(login_url='login')
+@login_required(login_url='login_get')
 def edit_patient(request, patient_id):
     patient_details_dto = __get_patient_details_dto_or_rise_404(patient_id)
     context = {
@@ -125,7 +125,7 @@ def search_input(request):
     return render(request, 'staff/search_input.html', context)
 
 
-@login_required(login_url='login')
+@login_required(login_url='login_get')
 def search_patient(request):
     patient = work_service_provider.patient_management_service().search_patient(request.GET.get('patient_number', None))
     context = {
