@@ -8,7 +8,7 @@ from work.service_provider import work_service_provider
 from django.shortcuts import redirect, render
 
 
-@login_required(login_url='login')
+@login_required(login_url='login_get')
 # @allowed_users(['doctor'])
 def list_medical_record(request):
     medical_records = work_service_provider.medical_record_management_service().list_medical_record()
@@ -18,7 +18,7 @@ def list_medical_record(request):
     return render(request, 'medical_record/list_doctor.html', context)
 
 
-@login_required(login_url='login')
+@login_required(login_url='login_get')
 # @allowed_users(['doctor'])
 def create_medical_record(request):
     patient = work_service_provider.patient_management_service().get_all_for_select_list()
