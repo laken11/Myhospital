@@ -39,7 +39,7 @@ def register_user_post(request):
     }
     __create_if_post_method(context, request, patient_id, patient_number)
     if request.method == 'POST' and context['saved']:
-        return redirect("login_get")
+        return redirect("register")
     return render(request, 'patient/Registerpage.html', context)
 
 
@@ -54,7 +54,7 @@ def register_user_post_staff(request):
     }
     __create_if_post_method(context, request, patient_id, patient_number)
     if request.method == 'POST' and context['saved']:
-        return redirect("register")
+        return redirect("aad_patient_for_staff")
     return render(request, 'staff/add_patiant_for_staff.html', context)
 
 
