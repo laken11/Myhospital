@@ -1,45 +1,46 @@
 {% extends 'fordoctor.html' %}
 {% block content %}
-
-<h2 class="table-header">Medical records</h2>
-<div class="table table-hover table-responsive table-bordered">
-    <table>
-        <thead>
-            <tr>
-                <th>Patient</th>
-                <th>Doctor</th>
-                <th>appointment History</th>
-                <th>Test Required</th>
-                <th>Treatment</th>
-                <th>Diagnosis</th>
-                <th>Updated time</th>
-                <th>Medications</th>
-                <th>Med number</th>
-            </tr>
-        </thead>
-        {% for medical_record in medical_records %}
-        <tbody>
-            <tr>
-                <td>{{ medical_record.Patient_user_first_name }}
-                    {{ medical_record.Patient_user_last_name }}</td>
-                <td>{{ medical_record.doctor_user_first_name }}
-                    {{ medical_record.doctor_user_last_name }}</td>
-                <td>{{ medical_record.appointment_history }}</td>
-                <td>{{ medical_record.test_required }}</td>
-                <td>{{ medical_record.treatment }}</td>
-                <td>{{ medical_record.diagnosis }}</td>
-                <td>{{ medical_record.updated_date }}</td>
-                <td>{{ medical_record.medications }}</td>
-                <td>{{ medical_record.med_number }}</td>
-                <td>
-                    {#                                        <div class="btn-row">#}
-                    {#                                            <a href="{% url '' %}" class="btn btn-success btn-group">Details</a>#}
-                    {#                                            <a href="{% url '' %}" class="btn btn-success btn-group">Edit</a>#}
-                    {#                                        </div>#}
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    {% endfor %}
+<div class="my-auto mt-5 mb-auto">
+    <h2 class="table-header">Medical records</h2>
+    <div class="table table-hover table-responsive table-bordered">
+        <table>
+            <thead>
+                <tr>
+                    <th>Patient</th>
+                    <th>Doctor</th>
+                    <th>appointment History</th>
+                    <th>Test Required</th>
+                    <th>Treatment</th>
+                    <th>Diagnosis</th>
+                    <th>Updated time</th>
+                    <th>Medications</th>
+                    <th>Med number</th>
+                </tr>
+            </thead>a
+            {% for medical_record in medical_records %}
+            <tbody>
+                <tr>
+                    <td>{{ medical_record.Patient_user_first_name }}
+                        {{ medical_record.Patient_user_last_name }}</td>
+                    <td>{{ medical_record.doctor_user_first_name }}
+                        {{ medical_record.doctor_user_last_name }}</td>
+                    <td>{{ medical_record.appointment_history }}</td>
+                    <td>{{ medical_record.test_required }}</td>
+                    <td>{{ medical_record.treatment }}</td>
+                    <td>{{ medical_record.diagnosis }}</td>
+                    <td>{{ medical_record.updated_date }}</td>
+                    <td>{{ medical_record.medications }}</td>
+                    <td>{{ medical_record.med_number }}</td>
+                    <td>
+                        {#                                        <div class="btn-row">#}
+                        {#                                            <a href="{% url '' %}" class="btn btn-success btn-group">Details</a>#}
+                        {#                                            <a href="{% url '' %}" class="btn btn-success btn-group">Edit</a>#}
+                        {#                                        </div>#}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        {% endfor %}
+    </div>
 </div>
-    {% endblock %}
+{% endblock %}
