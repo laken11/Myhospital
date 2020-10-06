@@ -110,7 +110,8 @@ def edit_patient(request, patient_id):
     context = {
         'title': f'Edit patient {patient_details_dto.user_first_name}',
         'patient_id': patient_id,
-        'patient': patient_details_dto
+        'patient': patient_details_dto,
+        'date_of_birth': patient_details_dto.date_of_birth.strftime("%Y-%m-%d %H:%M:%S"),
     }
     new_patient_dto = __edit_if_post_method(context, request, patient_id)
     if new_patient_dto is not None:
