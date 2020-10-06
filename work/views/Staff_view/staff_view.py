@@ -78,8 +78,10 @@ def edit_staff(request, id: int):
     staff_detail_dto = __get_staff_details_or_raise_404(id)
     context = {
         'staff': staff_detail_dto,
+        'date_of_birth': staff_detail_dto.date_of_birth.strftime("%Y-%m-%d %H:%M:%S"),
+        'year_of_employment': staff_detail_dto.year_of_employment.strftime("%Y-%m-%d %H:%M:%S"),
         'id': id,
-        'title': 'Edit flight'
+        'title': 'Edit flight',
     }
     new_staff_dto = __edit_if_post_method(context, request, id)
     if new_staff_dto is not None:
