@@ -27,6 +27,7 @@ class DoctorDetailsDto:
     staff_first_name: str
     specialization: str
     appointment_schedule: int
+    doctor_number: str
 
 
 class SearchDoctorDto:

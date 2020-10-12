@@ -1,0 +1,30 @@
+{% extends 'fordoctor.html' %}
+{% block content %}
+    <div class="container">
+        <div class="row my-auto">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">
+                            Enter Patient's Number
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        <form action="{% url 'search_med_output' %}" method="GET">
+                            <div class="form-group">
+                                <label for="patient_number" class="form-check-label">
+                                    Patient number
+                                </label>
+                                <input class="form-control" name="patient_number" type="text" id="patient_number"
+                                       required>
+                            </div>
+                            <div class="card-footer">
+                                <button class="btn btn-success" type="submit">Search</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

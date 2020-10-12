@@ -61,9 +61,13 @@
                                 <p class="form-control">{{ occupation }}</p>
                             </div>
                             <div class="form-group col-md-6">
-                                <label class="form-check-label">Address</label>
-                                <p class="form-control">{{ address }}</p>
+                                <label class="form-check-label">Tel</label>
+                                <p class="form-control">{{ phone }}</p>
                             </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-check-label">Address</label>
+                            <textarea class="form-control" readonly>{{ address }}</textarea>
                         </div>
                         <div class="card-footer">
                             <a href="{% url 'edit_patient' id %}" class="btn btn-warning float-right">Edit</a>

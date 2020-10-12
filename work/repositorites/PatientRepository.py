@@ -70,10 +70,11 @@ class DjangoORMPatientRepository(PatientRepository):
             patient.gender = model.gender
             patient.blood_group = model.blood_group
             patient.marital_status = model.marital_status
-            patient.next_of_kin = model.address
+            patient.next_of_kin = model.next_of_kin
             patient.phone = model.phone
             patient.genotype = model.genotype
             patient.date_of_birth = model.date_of_birth
+            patient.address = model.address
             patient.save()
         except Patient.DoesNotExist as e:
             message = "Patient dose not exist"

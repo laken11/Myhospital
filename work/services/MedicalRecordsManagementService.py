@@ -27,7 +27,7 @@ class MedicalRecordsManagementService(metaclass=ABCMeta):
         raise NotImplementedError
 
     @abstractmethod
-    def search_medical_record(self, last_name: str, fist_name: str) -> SearchMedicalRecordsDto:
+    def search_medical_record(self, patient_number: str) -> SearchMedicalRecordsDto:
         """Return medical record object"""
         raise NotImplementedError
 
@@ -50,5 +50,5 @@ class DefaultMedicalRecordManagementService(MedicalRecordsManagementService):
     def medical_record_details(self, id: int) -> MedicalRecordsDetailsDto:
         return self.repository.medical_record_details(id=id)
 
-    def search_medical_record(self, last_name: str, fist_name: str) -> SearchMedicalRecordsDto:
-        return self.repository.search_medical_record(last_name=last_name, fist_name=fist_name)
+    def search_medical_record(self, patient_number: str) -> SearchMedicalRecordsDto:
+        return self.repository.search_medical_record(patient_number=patient_number)

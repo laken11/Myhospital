@@ -34,9 +34,14 @@ def doctor_details(request, doctor_id):
 @login_required(login_url='login_get')
 @allowed_users(allowed_user=['doctor'])
 def doctor_home(request):
-    job_title = request.user.staff.job_title
+    first_name = request.user.first_name
+    last_name = request.user.last_name
+    id = request.user.staff.id
+    doctor = work_service_provider.doctor_management_service().doctor_details(id)
     context = {
-        'job': job_title
+        'first_name': first_name,
+        'last_name': last_name,
+        'doctor': doctor
     }
     return render(request, 'doctor/doctorHome.html', context)
 

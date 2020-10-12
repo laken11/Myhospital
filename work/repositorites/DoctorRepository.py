@@ -88,6 +88,7 @@ class DjangoORMDoctorRepository(DoctorRepository):
             result.staff_last_name = doctor.staff.user.last_name
             result.appointment_schedule = doctor.appointment_schedules
             result.specialization = doctor.specialization
+            result.doctor_number = doctor.doctor_number
             return result
         except Doctor.DoesNotExist as e:
             message = 'Doctor dose not exit'

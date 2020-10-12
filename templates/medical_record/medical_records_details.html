@@ -1,0 +1,60 @@
+{% extends 'fordoctor.html' %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <h4>Medical record
+                                for {{ medical_record.patient_user_last_name }} {{ medical_record.patient_user_first_name }}<br>
+                                on {{ medical_record.updated_date }}</h4>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label class="form-check-label">Doctor:</label>
+                            <label class="form-control">{{ medical_record.doctor_user_last_name }} {{ mecidal_record.doctor_user_first_name }}</label>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label class="form-check-label">Appointment History</label>
+                                <label class="form-control">{{ medical_record.appointment_history }}</label>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="form-check-label">Text required</label>
+                                <label class="form-control">{{ medical_record.test_required }}</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-check-label">Diagnosis</label>
+                            <textarea class="form-control"
+                                      aria-label="With textarea" readonly>{{ medical_record.diagnosis }}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-check-label">Treatment</label>
+                            <textarea class="form-control" aria-label="With textarea"
+                                      readonly>{{ medical_record.treatment }}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-check-label">Medication</label>
+                            <textarea class="form-control" aria-label="With textarea"
+                                      readonly>{{ medical_record.medication }}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-check-label">Med Reference</label>
+                            <label class="form-control">{{ medical_record.med_id }}</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-check-label">Med Number</label>
+                            <label class="form-control">{{ medical_record.med_number }}</label>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a class="btn btn-success float-right" href="{% url 'list_medical_record' %}">Back</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -95,13 +95,14 @@ def patient_home(request):
 
 
 @login_required(login_url='login_get')
+@allowed_users(allowed_user=['staffs'])
 def patient_details(request, patient_id):
     patient = __get_patient_details_dto_or_rise_404(patient_id)
     context = {
         'title': 'Patient Details',
         'patient': patient
     }
-    return render(request, 'patient/details_patient.html', context)
+    return render(request, 'staff/patient_details.html', context)
 
 
 @login_required(login_url='login_get')
@@ -119,6 +120,8 @@ def edit_patient(request, patient_id):
     return render(request, "patient/edit_patient.html", context)
 
 
+@login_required(login_url='login_get')
+@allowed_users(allowed_user=['staffs'])
 def search_input(request):
     context = {
 
@@ -127,6 +130,7 @@ def search_input(request):
 
 
 @login_required(login_url='login_get')
+@allowed_users(allowed_user=['staffs'])
 def search_patient(request):
     patient = work_service_provider.patient_management_service().search_patient(request.GET.get('patient_number', None))
     context = {
@@ -136,6 +140,8 @@ def search_patient(request):
     return render(request, 'staff/search_patient.html', context)
 
 
+@login_required(login_url='login_get')
+@allowed_users(allowed_user=['staffs'])
 def edit_patient_for_staff(request, patient_id: int):
     patient_details_dto = __get_patient_details_dto_or_rise_404(patient_id)
     context = {

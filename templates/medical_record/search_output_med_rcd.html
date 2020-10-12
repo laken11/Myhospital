@@ -1,0 +1,49 @@
+{% extends 'fordoctor.html' %}
+{% block content %}
+    <div class="container">
+        {% if medical_records %}
+            <div class="row my-auto">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">
+                                Medical records
+                            </h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th>Doctor</th>
+                                    <th>Updated date</th>
+                                    <th>Appointment history</th>
+                                    <th>Med number</th>
+                                    <th>Patient number</th>
+                                    <th>Text required</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                {% for medical_record in medical_records %}
+                                    <tbody>
+                                    <tr>
+                                        <td>{{ medical_record.doctor_user_last_name }} {{ medical_record.doctor_user_first_name }}</td>
+                                        <td>{{ medical_record.updated_date }}</td>
+                                        <td>{{ medical_record.appointment_history }}</td>
+                                        <td>{{ medical_record.med_number }}</td>
+                                        <td>{{ medical_record.patient_number }}</td>
+                                        <td>{{ medical_record.test_required }}</td>
+                                        <td><a class="btn btn-success"
+                                               href="{% url 'medical_record_details' medical_record.id %}">Details</a></td>
+                                    </tr>
+                                    </tbody>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <p class="info text-info text-center bg-danger">No medical record</p>
+        {% endif %}
+    </div>
+{% endblock %}

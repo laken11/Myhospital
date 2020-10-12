@@ -37,6 +37,8 @@ class MedicalRecordsDetailsDto:
     Patient_user_first_name: str
     doctor_user_first_name: str
     med_number: str
+    treatment: str
+
 
 
 class SearchMedicalRecordsDto:
@@ -45,13 +47,13 @@ class SearchMedicalRecordsDto:
     test_required: str
     appointment_history: str
     updated_date: date
-    patient_user_last_name: str
+    patient_number: str
     diagnosis: str
     medication: str
     med_id: str
-    Patient_user_first_name: str
     doctor_user_first_name: str
     med_number: str
+    treatment: str
 
 
 class ListMedicalRecordsDto:

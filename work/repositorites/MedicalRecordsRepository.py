@@ -27,9 +27,10 @@ class MedicalRecordsRepository(metaclass=ABCMeta):
         raise NotImplementedError
 
     @abstractmethod
-    def search_medical_record(self, last_name: str, fist_name: str) -> SearchMedicalRecordsDto:
+    def search_medical_record(self, patient_number: str) -> SearchMedicalRecordsDto:
         """Return medical record object"""
         raise NotImplementedError
+
 
 
 class DjangoORMMedicalRecordRepository(MedicalRecordsRepository):
@@ -96,43 +97,42 @@ class DjangoORMMedicalRecordRepository(MedicalRecordsRepository):
         try:
             medical_record = MedicalRecords.objects.get(id=id)
             result = MedicalRecordsDetailsDto()
-            result.id = medical_record.id
-            result.Patient_user_first_name = medical_record.patient.user.first_name
-            result.Patient_user_last_name = medical_record.patient.user.last_name
+            result.patient_user_first_name = medical_record.patient.user.first_name
+            result.patient_user_last_name = medical_record.patient.user.last_name
             result.doctor_user_last_name = medical_record.doctor.staff.user.last_name
             result.doctor_user_first_name = medical_record.doctor.staff.user.first_name
             result.appointment_history = medical_record.appointment_history
             result.updated_date = medical_record.updated_date
             result.test_required = medical_record.test_required
-            result.med_ref = medical_record.med_ref
+            result.med_id = medical_record.med_id
+            result.treatment = medical_record.treatments
+            result.test_required = medical_record.test_required
             result.diagnosis = medical_record.diagnosis
             result.medication = medical_record.medications
+            result.med_number = medical_record.med_number
             return result
         except MedicalRecords.DoesNotExist as e:
             message = 'Medical record does not exit'
             print(message)
             raise e
 
-    def search_medical_record(self, last_name: str, fist_name: str) -> List[SearchMedicalRecordsDto]:
-        medical_records = MedicalRecords.objects
-        if medical_records is not None:
-            medical_records = medical_records.filter(patient__user__last_name=last_name)
-        if medical_records is not None:
-            medical_records = medical_records.filter(patient__user__first_name=last_name)
-
+    def search_medical_record(self, patient_number: str) -> List[SearchMedicalRecordsDto]:
+        medical_records = MedicalRecords.objects.filter(patient__patient_number=patient_number)
         medical_records = list(medical_records)
         results = []
         for medical_record in medical_records:
-            results = SearchMedicalRecordsDto
-            results.id = medical_record.id
-            results.doctor_user_first_name = medical_record.doctor.staff.user.first_name
-            results.doctor_user_last_name = medical_record.doctor.staff.user.last_name
-            results.Patient_user_first_name = medical_record.patient.user.first_name
-            results.patient_user_last_name = medical_record.patient.user.last_name
-            results.med_ref = medical_record.med_ref
-            results.medication = medical_record.medication
-            results.diagnosis = medical_record.diagnosis
-            results.test_required = medical_record.diagnosis
-            results.updated_date = medical_record.updated_date
-            results.appointment_history = medical_record.appointment_history
+            result = SearchMedicalRecordsDto()
+            result.test_required = medical_record.test_required
+            result.med_id = medical_record.med_id
+            result.med_number = medical_record.med_number
+            result.diagnosis = medical_record.diagnosis
+            result.medication = medical_record.medications
+            result.treatment = medical_record.treatments
+            result.doctor_user_last_name = medical_record.doctor.staff.user.last_name
+            result.doctor_user_first_name = medical_record.doctor.staff.user.first_name
+            result.patient_number = medical_record.patient.patient_number
+            result.updated_date = medical_record.updated_date
+            result.appointment_history = medical_record.appointment_history
+            result.id = medical_record.id
+            results.append(result)
         return results

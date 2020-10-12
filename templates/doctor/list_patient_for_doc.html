@@ -10,15 +10,11 @@
                     <th>Last name</th>
                     <th>Email</th>
                     <th>Phone</th>
-                    <th>Address</th>
                     <th>Gender</th>
                     <th>Blood-group</th>
                     <th>Marital status</th>
                     <th>Genotype</th>
-                    <th>Next of kin</th>
-                    <th>Occupation</th>
                     <th>Patient Number</th>
-                    <th>Patient ID</th>
                 </tr>
             </thead>
             {% for patient in patients %}
@@ -28,15 +24,11 @@
                     <td>{{ patient.user_last_name }}</td>
                     <td>{{ patient.user_email }}</td>
                     <td>{{ patient.phone }}</td>
-                    <td>{{ patient.address }}</td>
                     <td>{{ patient.gender }}</td>
                     <td>{{ patient.blood_group }}</td>
                     <td>{{ patient.marital_status }}</td>
                     <td>{{ patient.genotype }}</td>
-                    <td>{{ patient.next_of_kin }}</td>
-                    <td>{{ patient.occupation }}</td>
                     <td>{{ patient.patient_number }}</td>
-                    <td>{{ patient.patient_id }}</td>
                 </tr>
             </tbody>
             {% endfor %}
