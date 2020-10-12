@@ -26,8 +26,8 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label class="form-check-label">Address</label>
-                                <label class="form-control">{{ patient.address }}</label>
+                                <label class="form-check-label">Patient ID</label>
+                                <label class="form-control">{{ patient.patient_id }}</label>
                             </div>
                             <div class="form-group col-md-6">
                                 <label class="form-check-label">Occupation</label>
@@ -55,9 +55,12 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="form-check-label">Patient Number</label>
-                            <label class="form-control">{{ patient.patient_id }}</label>
+                            <label class="form-check-label">Address</label>
+                            <textarea readonly class="form-control">{{ patient.address }}</textarea>
                         </div>
+                    </div>
+                    <div class="card-footer">
+                        <a class="btn btn-success float-right" href="{% url 'list_patients' %}"><< Back</a>
                     </div>
                 </div>
             </div>
