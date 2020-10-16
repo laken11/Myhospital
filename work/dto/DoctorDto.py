@@ -37,3 +37,8 @@ class SearchDoctorDto:
     specialization: str
     appointment_schedule: str
     doctor_number: str
+
+
+class GetSchedule:
+    id: int
+    appointment_schedule: str

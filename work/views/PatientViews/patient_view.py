@@ -1,4 +1,7 @@
 import uuid
+
+from requests import request
+
 from work.decorators import allowed_users
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, Http404, HttpRequest
@@ -6,6 +9,7 @@ from django.shortcuts import render, redirect
 from work.service_provider import work_service_provider
 from work.models import Patient
 from work.dto.PatientDto import ListPatientDto, SearchPatientDto, EditPatientDto, CreatePatientDto, PatientDetailsDto
+from django.core.exceptions import ValidationError
 
 
 @login_required(login_url='login_get')
@@ -30,6 +34,13 @@ def list_patient_for_doctor(request):
     return render(request, 'doctor/list_patient_for_doc.html', context)
 
 
+def register_user_get(request):
+    context = {
+
+    }
+    return render(request, 'patient/Registerpage.html', context)
+
+
 def register_user_post(request):
     patient_id = uuid.uuid4()
     patient_number = str(uuid.uuid4()).replace("-", '')[0:10].upper()
@@ -37,7 +48,7 @@ def register_user_post(request):
         'patient_id': patient_id,
         'patient_number': patient_number
     }
-    __create_if_post_method(context, request, patient_id, patient_number)
+    __create_if_post_method(context, request)
     if request.method == 'POST' and context['saved']:
         return redirect("login_get")
     return render(request, 'patient/Registerpage.html', context)
@@ -52,7 +63,7 @@ def register_user_post_staff(request):
         'patient_id': patient_id,
         'patient_number': patient_number
     }
-    __create_if_post_method(context, request, patient_id, patient_number)
+    __create_if_post_method(context, request)
     if request.method == 'POST' and context['saved']:
         return redirect("aad_patient_for_staff")
     return render(request, 'staff/add_patiant_for_staff.html', context)
@@ -185,6 +196,7 @@ def __set_patient_attributes_form_request(create_patient_dto, request):
     create_patient_dto.date_of_birth = request.POST['date_of_birth']
     create_patient_dto.patient_number = request.POST['patient_number']
     create_patient_dto.patient_id = request.POST['patient_id']
+    create_patient_dto.confirm_password = request.POST['confirm_password']
 
 
 def __get_edit_patient_dto_from_request(request: HttpRequest, patient_id: int) -> EditPatientDto:
@@ -201,14 +213,18 @@ def __get_create_patient_dto_from_request(request: HttpRequest) -> CreatePatient
     return create_patient_dto
 
 
-def __create_if_post_method(context, request, patient_id, patient_number):
+def __create_if_post_method(context, request):
     if request.method == 'POST':
         try:
             patient = __get_create_patient_dto_from_request(request)
-            work_service_provider.patient_management_service().create_patient(patient)
-            context['saved'] = True
+            password = patient.password
+            confirm_password = patient.confirm_password
+            if password == confirm_password:
+                work_service_provider.patient_management_service().create_patient(patient)
+                context['saved'] = True
+            else:
+                context['saved'] = False
         except Exception as e:
-            print(e)
             context['saved'] = False
 
 

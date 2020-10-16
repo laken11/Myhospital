@@ -95,13 +95,26 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="blood_group" class="form-check-label">Blood Group</label>
-                                        <input name="blood_group" class="form-control" value="{{ patient.blood_group }}"
-                                               id="blood_group" type="text">
+                                        <select class="form-control" name="blood_group" id="blood_group">
+                                            <option value="O+">O+</option>
+                                            <option value="O-">O-</option>
+                                            <option value="B+">B+</option>
+                                            <option value="B-">B-</option>
+                                            <option value="A+">A+</option>
+                                            <option value="A-">A-</option>
+                                            <option value="AB+">AB+</option>
+                                            <option value="AB-">AB-</option>
+                                        </select>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="genotype" class="form-check-label">Genotype:</label>
-                                        <input name="genotype" class="form-control" value="{{ patient.genotype }}"
-                                               id="genotype" type="text">
+                                        <select class="form-control" name="genotype" id="genotype">
+                                            <option value="AA">AA</option>
+                                            <option value="AB">AB</option>
+                                            <option value="AC">AC</option>
+                                            <option value="AS">AS</option>
+                                            <option value="SS">SS</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-row">
@@ -116,7 +129,7 @@
                                                type="text" value="{{ patient_number }}" readonly>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" hidden>
                                     <label for="patient_id" class="">Patient ID</label>
                                     <input name="patient_id" class="form-control disabled" id="patient_id" type="text"
                                            value="{{ patient_id }}" readonly>

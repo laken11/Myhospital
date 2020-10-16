@@ -107,23 +107,28 @@ class DjangoORMPatientRepository(PatientRepository):
             raise e
 
     def search_patient(self, patient_number: str) -> SearchPatientDto:
-        patient = Patient.objects.get(patient_number=patient_number)
-        result = SearchPatientDto()
-        result.id = patient.id
-        result.user_last_name = patient.user.first_name
-        result.user_first_name = patient.user.last_name
-        result.date_of_birth = patient.date_of_birth
-        result.gender = patient.gender
-        result.marital_status = patient.marital_status
-        result.occupation = patient.occupation
-        result.genotype = patient.genotype
-        result.next_of_kin = patient.next_of_kin
-        result.phone = patient.phone
-        result.blood_group = patient.blood_group
-        result.address = patient.address
-        result.email = patient.user.email
-        result.patient_number = patient.patient_number
-        return result
+        try:
+            patient = Patient.objects.get(patient_number=patient_number)
+            result = SearchPatientDto()
+            result.id = patient.id
+            result.user_last_name = patient.user.first_name
+            result.user_first_name = patient.user.last_name
+            result.date_of_birth = patient.date_of_birth
+            result.gender = patient.gender
+            result.marital_status = patient.marital_status
+            result.occupation = patient.occupation
+            result.genotype = patient.genotype
+            result.next_of_kin = patient.next_of_kin
+            result.phone = patient.phone
+            result.blood_group = patient.blood_group
+            result.address = patient.address
+            result.email = patient.user.email
+            result.patient_number = patient.patient_number
+            return result
+        except Patient.DoesNotExist as e:
+            message = "Patient dose not exist"
+            print(message)
+            raise e
 
     def list_patient(self) -> List[ListPatientDto]:
         patients = list(Patient.objects.values('id',

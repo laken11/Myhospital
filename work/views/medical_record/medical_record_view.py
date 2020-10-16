@@ -23,8 +23,9 @@ def list_medical_record(request):
 @allowed_users(['doctor'])
 def create_medical_record(request):
     patient = work_service_provider.patient_management_service().get_all_for_select_list()
-    doctor = work_service_provider.doctor_management_service().get_all_for_select_list()
     med_id = uuid.uuid4()
+    id = request.user.staff.id
+    doctor = work_service_provider.doctor_management_service().doctor_details(id)
     med_number = str(uuid.uuid4()).replace("-", '')[0:10].upper()
     context = {
         'patient': patient,

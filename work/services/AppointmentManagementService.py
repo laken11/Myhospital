@@ -26,6 +26,14 @@ class AppointManagementService(metaclass=ABCMeta):
         """Returns Appointment Object"""
         raise NotImplementedError
 
+    def get_appointment_for_doctor(self, appointment_date: date, doctor_id: int):
+        """Returns Appointments objects"""
+        raise NotImplementedError
+
+    def get_appointment_by_date(self, appointment_date: date, doctor_id: int):
+        """List of appointments"""
+        raise NotImplementedError
+
 
 class DefaultAppointmentManagementService(AppointManagementService):
     repository: AppointmentRepository
@@ -44,4 +52,10 @@ class DefaultAppointmentManagementService(AppointManagementService):
 
     def list_appointment(self) -> List[ListAppointmentDto]:
         return self.repository.list_appointment()
+
+    def get_appointment_for_doctor(self, appointment_date: date, doctor_id: int):
+        return self.repository.get_appointment_for_doctor(appointment_date=appointment_date, doctor_id=doctor_id)
+
+    def get_appointment_by_date(self, appointment_date: date, doctor_id: int):
+        return self.repository.get_appointment_by_date(appointment_date=appointment_date, doctor_id=doctor_id)
 

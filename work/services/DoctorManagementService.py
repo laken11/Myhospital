@@ -41,6 +41,15 @@ class DoctorManagementService(metaclass=ABCMeta):
         """ Create a doctor object"""
         raise NotImplementedError
 
+    def get_schedule(self, doctor_number: int) -> GetSchedule:
+        """Return doctor object"""
+        raise NotImplementedError
+
+    @abstractmethod
+    def get_doctor_number(self, doctor_id: int):
+        """Return doctor number"""
+        raise NotImplementedError
+
 
 class DefaultDoctorManagementService(DoctorManagementService):
     repository: DoctorRepository
@@ -68,3 +77,9 @@ class DefaultDoctorManagementService(DoctorManagementService):
 
     def get_all_for_select_list_doc(self) -> List[SelectOptionDto]:
         return self.repository.get_all_for_select_list_doc()
+
+    def get_schedule(self, doctor_number: int) -> GetSchedule:
+        return  self.repository.get_schedule(doctor_number=doctor_number)
+
+    def get_doctor_number(self, doctor_id: int):
+        return self.repository.get_doctor_number(doctor_id=doctor_id)

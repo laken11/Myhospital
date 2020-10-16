@@ -1,7 +1,6 @@
 {% load static %}
 <!doctype html>
 <html lang="en">
-
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -21,12 +20,13 @@
     <!-- magnific popup CSS -->
     <link rel="stylesheet" href="{% static 'api/assets/css/magnific-popup.css' %}">
     <!-- nice select CSS -->
-    <link rel="stylesheet" href="{% static 'api/assets/css/nice-select.css' %}">
+{#    <link rel="stylesheet" href="{% static 'api/assets/css/nice-select.css' %}">#}
     <!-- swiper CSS -->
     <link rel="stylesheet" href="{% static 'api/assets/css/slick.css' %}">
     <!-- style CSS -->
     <link rel="stylesheet" href="{% static 'api/assets/css/style.css' %}">
     <script src="{% static 'api/assets/js/sweetalert2.min.js' %}"></script>
+
 </head>
 
 <body>
@@ -85,7 +85,7 @@
 <script src="{% static 'api/assets/js/bootstrap.min.js' %}"></script>
 <!-- owl carousel js -->
 <script src="{% static 'api/assets/js/owl.carousel.min.js' %}"></script>
-<script src="{% static 'api/assets/js/jquery.nice-select.min.js' %}"></script>
+{#<script src="{% static 'api/assets/js/jquery.nice-select.min.js' %}"></script>#}
 <!-- contact js -->
 <script src="{% static 'api/assets/js/jquery.ajaxchimp.min.js' %}"></script>
 <script src="{% static 'api/assets/js/jquery.form.js' %}"></script>
@@ -94,6 +94,13 @@
 <script src="{% static 'api/assets/js/contact.js' %}"></script>
 <!-- custom js -->
 <script src="{% static 'api/assets/js/custom.js' %}"></script>
-
+<script>
+    $('#password, #confirm_password').on('keyup', function () {
+        if ($('#password').val() === $('#confirm_password').val()) {
+            $('#message').html('Matching').css('color', 'green');
+        } else
+            $('#message').html('Not Matching').css('color', 'red');
+    });
+</script>
 </body>
 </html>

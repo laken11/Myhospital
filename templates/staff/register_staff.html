@@ -1,7 +1,7 @@
 {% extends 'forstaff.html' %}
 {% block content %}
     <div class="container">
-        <div class="row mt-5">
+        <div class="row justify-content-center">
             <div class="col-md-10">
                 <div class="card">
                     <div class="card-header">
@@ -98,7 +98,7 @@
                                            value="{{ staff_number }}" readonly>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" hidden>
                                 <label for="staff_id" class="form-check-label">Staff ID</label>
                                 <input name="staff_id" class="form-control disabled" id="staff_id"
                                        value="{{ staff_id }}" readonly>

@@ -18,7 +18,7 @@ class Patient(models.Model):
     next_of_kin = models.CharField(max_length=50)
 
     def __str__(self):
-        return f'{self.user}\t{self.phone}\t{self.address}\t{self.date_of_birth}\t{self.occupation}\t{self.marital_status}\t{self.next_of_kin}\t{self.genotype}\t{self.blood_group}\t{self.patient_number}\t{self.patient_id}'
+        return f'{self.user.username}\t{self.patient_number}\t{self.user.first_name}\t{self.user.last_name}'
 
 
 class Staff(models.Model):
@@ -33,7 +33,7 @@ class Staff(models.Model):
     phone = models.CharField(max_length=20)
 
     def __str__(self):
-        return f'{self.staff_id}\t{self.address}\t{self.date_of_birth}\t{self.job_title}\t{self.year_of_employment}\t{self.level}{self.user}\t{self.phone}\t{self.staff_number}'
+        return f'{self.user.username}\t{self.staff_number}\t{self.user.first_name}\t{self.user.last_name}'
 
 
 class Doctor(models.Model):
@@ -43,7 +43,7 @@ class Doctor(models.Model):
     doctor_number = models.CharField(max_length=10)
 
     def __str__(self):
-        return f'{self.staff}\t{self.specialization}\t{self.appointment_schedules}'
+        return f'{self.staff.user.username}\t{self.staff.staff_number}\t{self.doctor_number}\t{self.specialization}\t{self.appointment_schedules}'
 
 
 class MedicalRecords(models.Model):
@@ -59,8 +59,7 @@ class MedicalRecords(models.Model):
     doctor = models.ForeignKey(Doctor, on_delete=models.RESTRICT)
 
     def __str__(self):
-        return f'{self.med_number}\t{self.patient}\t{self.diagnosis}\t{self.treatments}\t{self.medications}\t{self.test_required}\t{self.updated_date}\t{self.appointment_history}\t{self.doctor}'
-
+        return f'{self.med_number}\t{self.patient.user.username}'
 
 class Appointments(models.Model):
     appointment_datetime = models.DateField()
@@ -70,8 +69,7 @@ class Appointments(models.Model):
     doctor = models.ForeignKey(Doctor, on_delete=models.RESTRICT)
 
     def __str__(self):
-        return f'{self.appointment_reference}\t{self.appointment_reference}\t{self.patient}\t{self.doctor}\t{self.appointment_number}'
-
+        return f'{self.appointment_number}'
 
 class LabTest(models.Model):
     test_name = models.CharField(max_length=150)

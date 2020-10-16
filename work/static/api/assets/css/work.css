@@ -115,3 +115,13 @@ a, a:hover, a:focus {
     min-height: 100vh;
     transition: all 0.3s;
 }
+#myInput {
+    background: url('../img/srch.jpg') no-repeat;
+    background-position: 10px 12px; /* Position the search icon */
+    background-size: 28px 28px;
+    width: 100%; /* Full-width */
+    font-size: 16px; /* Increase font-size */
+    padding: 12px 20px 12px 40px; /* Add some padding */
+    border: 2px solid #3cdb3c; /* Add a grey border */
+    margin-bottom: 12px; /* Add some space below the input */
+}

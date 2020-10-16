@@ -8,5 +8,6 @@ urlpatterns = [
     path('list/', staff_view.list_staff, name='list_staff'),
     path('<id>/', staff_view.staff_details, name='staff_details'),
     path('<id>/edit', staff_view.edit_staff, name='edit staff'),
+    path('<id>/details', staff_view.staff_details, name='staff details'),
     path('', staff_view.staff_home, name='staff_home'),
 ]

@@ -29,11 +29,8 @@
                             {% csrf_token %}
                             <div class="form-group">
                                 <label for="doctor_id" class="form-check-label">Doctor</label>
-                                <select name="doctor_id" class="form-control" id="doctor_id" type="text">
-                                    {% for d in doctor %}
-                                        <option label="{{ d.text }}" value="{{ d.id }}">{{ d.text }}</option>
-                                    {% endfor %}
-                                </select>
+                                <input value="{{ doctor.doctor_number }}" readonly class="form-control">
+                                <input name="doctor_id" id="doctor_id" value="{{ doctor.id }}" class="form-control" hidden>
                             </div>
                             <div class="form-group">
                                 <label for="patient_id" class="form-check-label">Patient</label>
@@ -84,7 +81,7 @@
                                 <textarea name="medications" class="form-control" type="text"
                                           id="medications"></textarea>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" hidden>
                                 <label for="med_id" class="form-check-label">Med Reference</label>
                                 <input name="med_id" class="form-control" id="med_id"
                                        value="{{ med_id }}" readonly required>

@@ -9,23 +9,23 @@
                     </div>
                     <div class="card-body">
                         <form action="{% url 'Create_appointment' %}" method="POST">
-                        {% if saved is False %}
-                            <script>
-                                Swal.fire({
-                                    icon: 'error',
-                                    title: 'Sorry',
-                                    text: 'An error occurred while trying create appointment'
-                                });
-                            </script>
-                        {% elif saved is True %}
-                            <script>
-                                Swal.fire({
-                                    icon: 'success',
-                                    title: 'Congratulations!',
-                                    text: 'Successfully Scheduled'
-                                });
-                            </script>
-                        {% endif %}
+                            {% if saved is False %}
+                                <script>
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Sorry',
+                                        text: 'Doctor is Full for this day try another date'
+                                    });
+                                </script>
+                            {% elif saved is True %}
+                                <script>
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Congratulations!',
+                                        text: 'Successfully Scheduled'
+                                    });
+                                </script>
+                            {% endif %}
                             {% csrf_token %}
                             <div class="form-group">
                                 <label for="doctor_id" class="form-check-label">Doctor</label>
@@ -36,9 +36,10 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label class="form-check-label" for="patient_id">Patient: {{ patient_number }}</label>
+                                <label class="form-check-label" for="patient_id">Patient</label>
+                                <label class="form-control">{{ patient_number }}</label>
                                 <input class="form-control" name="patient_id" id="patient_id" value="{{ patient_id }}"
-                                       readonly>
+                                        hidden>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">

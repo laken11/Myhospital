@@ -1,3 +1,4 @@
+import datetime
 import uuid
 
 from django.contrib.auth.decorators import login_required
@@ -38,10 +39,17 @@ def doctor_home(request):
     last_name = request.user.last_name
     id = request.user.staff.id
     doctor = work_service_provider.doctor_management_service().doctor_details(id)
+    appointment_date = datetime.datetime.now().date()
+    doctor_id = doctor.id
+    appointments = work_service_provider.appointment_management_service().get_appointment_for_doctor(appointment_date,
+                                                                                                  doctor_id)
+    length = len(appointments)
     context = {
         'first_name': first_name,
         'last_name': last_name,
-        'doctor': doctor
+        'doctor': doctor,
+        'appointments': appointments,
+        'length': length
     }
     return render(request, 'doctor/doctorHome.html', context)
 

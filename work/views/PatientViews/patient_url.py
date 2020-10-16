@@ -2,6 +2,7 @@ from django.urls import path
 from work.views.PatientViews import patient_view
 
 urlpatterns = [
+    path("register_get/", patient_view.register_user_get, name='register_get'),
     path('search/', patient_view.search_patient, name='search_patient'),
     path('list_for_doctor/', patient_view.list_patient_for_doctor, name='list_for_doctor'),
     path('searhinput', patient_view.search_input, name='searchInput'),

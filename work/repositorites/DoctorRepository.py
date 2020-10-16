@@ -2,9 +2,9 @@ from abc import ABCMeta, abstractmethod
 from typing import List
 from work.models import Doctor
 from django.contrib.auth.models import Group
-from work.dto.DoctorDto import CreateDoctorDto, DoctorDetailsDto, ListDoctorDto, EditDoctorDto, SearchDoctorDto
+from work.dto.DoctorDto import CreateDoctorDto, DoctorDetailsDto, ListDoctorDto, EditDoctorDto, SearchDoctorDto, GetSchedule
 from work.dto.CommonDto import SelectOptionDto
-
+import datetime
 
 class DoctorRepository(metaclass=ABCMeta):
     @abstractmethod
@@ -36,9 +36,19 @@ class DoctorRepository(metaclass=ABCMeta):
     def get_all_for_select_list(self) -> List[SelectOptionDto]:
         """Create a doctor object"""
         raise NotImplementedError
-
+    @abstractmethod
     def get_all_for_select_list_doc(self) -> List[SelectOptionDto]:
         """ Create a doctor object"""
+        raise NotImplementedError
+
+    @abstractmethod
+    def get_schedule(self, doctor_number: int) -> GetSchedule:
+        """Return doctor object"""
+        raise NotImplementedError
+
+    @abstractmethod
+    def get_doctor_number(self, doctor_id: int):
+        """Return doctor number"""
         raise NotImplementedError
 
 
@@ -81,7 +91,7 @@ class DjangoORMDoctorRepository(DoctorRepository):
 
     def doctor_details(self, id: int) -> DoctorDetailsDto:
         try:
-            doctor = Doctor.objects.get(id=id)
+            doctor = Doctor.objects.get(staff_id=id)
             result = DoctorDetailsDto()
             result.id = doctor.id
             result.staff_first_name = doctor.staff.user.first_name
@@ -118,4 +128,18 @@ class DjangoORMDoctorRepository(DoctorRepository):
     def get_all_for_select_list_doc(self) -> List[SelectOptionDto]:
         doctor = Doctor.objects.values('id', 'specialization')
         return [SelectOptionDto(d['id'], d['specialization'])for d in doctor]
+
+    def get_schedule(self, doctor_number: int):
+        doctor = Doctor.objects.get(doctor_number=doctor_number)
+        result = GetSchedule
+        result.id = doctor.id
+        result.appointment_schedule = doctor.appointment_schedules
+        return result
+
+    def get_doctor_number(self, doctor_id):
+        doctor = Doctor.objects.get(id=doctor_id)
+        result = DoctorDetailsDto()
+        result.doctor_number = doctor.doctor_number
+        return result
+
 

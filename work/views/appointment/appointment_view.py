@@ -1,3 +1,4 @@
+import datetime
 import uuid
 from django.contrib.auth.decorators import login_required
 from django.http import Http404, HttpRequest
@@ -102,8 +103,21 @@ def __create_if_post_method(request, context):
     if request.method == 'POST':
         try:
             appointment = __get_create_attribute_from_request(request)
-            work_service_provider.appointment_management_service().create_appointment(appointment)
-            context['saved'] = True
+            doctor_id = appointment.doctor_id
+            doctor = work_service_provider.doctor_management_service().get_doctor_number(doctor_id)
+            doctor_number = doctor.doctor_number
+            appointment_date = appointment.appointment_datetime
+            appointment_schedule = work_service_provider.doctor_management_service().get_schedule(
+                doctor_number=doctor_number)
+            appointment_schedules = appointment_schedule.appointment_schedule
+            appointments = work_service_provider.appointment_management_service().get_appointment_by_date(
+                appointment_date, doctor_id)
+            number_of_appointments = len(appointments)
+            if number_of_appointments < appointment_schedules:
+                work_service_provider.appointment_management_service().create_appointment(appointment)
+                context['saved'] = True
+            else:
+                context['saved'] = False
         except Exception as e:
             print(e)
             context['saved'] = False

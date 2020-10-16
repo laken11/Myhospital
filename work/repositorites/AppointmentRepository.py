@@ -2,7 +2,7 @@ from abc import ABCMeta, abstractmethod
 from typing import List
 from work.models import Appointments
 from work.dto.AppointmentDto import AppointmentDetailsDto, CreateAppointmentDto, ListAppointmentDto, \
-    SearchAppointmentDto
+    SearchAppointmentDto, GetAppointmentForDoctor
 from datetime import date
 
 
@@ -22,6 +22,14 @@ class AppointmentRepository(metaclass=ABCMeta):
 
     def search_appointment(self, appointment_number: str):
         """Returns Appointment Object"""
+        raise NotImplementedError
+
+    def get_appointment_for_doctor(self, appointment_date: date, doctor_id: int):
+        """Returns Appointments objects"""
+        raise NotImplementedError
+
+    def get_appointment_by_date(self, appointment_date: date, doctor_id: int):
+        """List of appointments"""
         raise NotImplementedError
 
 
@@ -90,3 +98,35 @@ class DjangoORMAppointmentRepository(AppointmentRepository):
             message = 'Appointment does not exit'
             print(message)
             raise e
+
+    def get_appointment_for_doctor(self, appointment_date: date, doctor_id: int):
+        try:
+            appointments = Appointments.objects.filter(doctor_id=doctor_id).filter(appointment_datetime=appointment_date)
+            appointments = list(appointments)
+            results = []
+            for appointment in appointments:
+                result = GetAppointmentForDoctor()
+                result.id = appointment.id
+                result.appointment_number = appointment.appointment_number
+                result.patient_last_name = appointment.patient.user.last_name
+                result.patient_first_name = appointment.patient.user.first_name
+                results.append(result)
+            return results
+        except Appointments.DoesNotExist as e:
+            message = 'Appointment dose not exit'
+            print(message)
+            raise e
+
+    def get_appointment_by_date(self, appointment_date: date, doctor_id: int):
+        appointments = Appointments.objects.filter(appointment_datetime=appointment_date).filter(doctor_id=doctor_id)
+        appointments = list(appointments)
+        results = []
+        for appointment in appointments:
+            result = ListAppointmentDto()
+            result.appointment_datetime = appointment.appointment_datetime
+            results.append(result)
+        return results
+
+
+
+

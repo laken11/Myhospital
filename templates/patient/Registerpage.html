@@ -14,16 +14,16 @@
                                     Swal.fire({
                                         icon: 'error',
                                         title: 'Sorry',
-                                        text: 'An error occurred while trying to save'
+                                        text: 'Make sure the form is filled correctly'
                                     });
                                 </script>
                             {% elif saved is True %}
                                 <script>
-                                    Swal.fire({
+                                    swal.fire({
                                         icon: 'success',
-                                        title: 'Congratulations!',
-                                        text: 'Visit your Profile to book an appointment'
-                                    });
+                                        title: 'Congratulation!',
+                                        text: 'Congrts. Visit your profile to Book Appointment!'
+                                    })
                                 </script>
                             {% endif %}
                             {% csrf_token %}
@@ -54,7 +54,14 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="password" class="form-check-label">Password:</label>
-                                    <input name="password" class="form-control" type="password" id="password">
+                                    <input name="password" class="form-control" type="password" id="password"
+                                           value="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="confirm_password" class="form-check-label">Confirm password</label>
+                                    <input name="confirm_password" class="form-control" type="password"
+                                           id="confirm_password" value="">
+                                    <span class="text-info" id="message"></span>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
@@ -88,20 +95,35 @@
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="gender" class="form-check-label">Gender:</label>
-                                        <input name="gender" value="{{ patient.gender }}" id="gender" type="text"
-                                               class="form-control">
+                                        <select name="gender" class="form-control" id="gender" type="text">
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="blood_group" class="form-check-label">Blood Group</label>
-                                        <input name="blood_group" class="form-control" value="{{ patient.blood_group }}"
-                                               id="blood_group" type="text">
+                                        <select class="form-control" name="blood_group" id="blood_group">
+                                            <option value="O+">O+</option>
+                                            <option value="O-">O-</option>
+                                            <option value="B+">B+</option>
+                                            <option value="B-">B-</option>
+                                            <option value="A+">A+</option>
+                                            <option value="A-">A-</option>
+                                            <option value="AB+">AB+</option>
+                                            <option value="AB-">AB-</option>
+                                        </select>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="genotype" class="form-check-label">Genotype:</label>
-                                        <input name="genotype" class="form-control" value="{{ patient.genotype }}"
-                                               id="genotype" type="text">
+                                        <select class="form-control" name="genotype" id="genotype">
+                                            <option value="AA">AA</option>
+                                            <option value="AB">AB</option>
+                                            <option value="AC">AC</option>
+                                            <option value="AS">AS</option>
+                                            <option value="SS">SS</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-row">
@@ -116,13 +138,15 @@
                                                type="text" value="{{ patient_number }}" readonly>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" hidden>
                                     <label for="patient_id" class="">Patient ID</label>
                                     <input name="patient_id" class="form-control disabled" id="patient_id" type="text"
                                            value="{{ patient_id }}" readonly>
                                 </div>
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-success float-right">Register</button>
+                                    <button type="submit" class="btn btn-success float-right" id="submit-button">
+                                        Register
+                                    </button>
                                 </div>
                             </div>
                         </form>

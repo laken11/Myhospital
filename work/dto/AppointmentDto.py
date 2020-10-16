@@ -42,3 +42,11 @@ class AppointmentDetailsDto:
     appointment_number: str
 
 
+class GetAppointmentForDoctor:
+    id: int
+    appointment_number: str
+    patient_last_name: str
+    patient_first_name: str
+
+
+

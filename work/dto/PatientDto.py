@@ -18,6 +18,7 @@ class CreatePatientDto:
     next_of_kin: str
     patient_id: str
     patient_number: str
+    confirm_password: str
 
 
 class EditPatientDto:

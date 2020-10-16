@@ -1,35 +1,42 @@
 {% extends 'fordoctor.html' %}
 {% block content %}
     <div class="mt-5 mx-5 col-auto justify-content-center">
-        <h2 class="table-header">Medical records</h2>
-        <div class="table table-hover table-responsive">
-            <table>
-                <thead>
-                <tr>
-                    <th>Patient</th>
-                    <th>Test Required</th>
-                    <th>Updated time</th>
-                    <th>Med number</th>
-                    <th>Action</th>
-                </tr>
-                </thead>
-                {% for medical_record in medical_records %}
-                    <tbody>
-                    <tr>
-                        <td>{{ medical_record.Patient_user_first_name }}
-                            {{ medical_record.Patient_user_last_name }}</td>
-                        <td>{{ medical_record.test_required }}</td>
-                        <td>{{ medical_record.updated_date }}</td>
-                        <td>{{ medical_record.med_number }}</td>
-                        <td>
-                            <div class="btn-row">
-                                <a href="{% url 'medical_record_details' medical_record.id %}" class="btn btn-success btn-group">Details</a>
-                            </div>
-                        </td>
-                    </tr>
-                    </tbody>
-                {% endfor %}
-            </table>
+    <div class="row">
+        <h2 class="table-header col-md-6">Medical records</h2>
+        <input type="text" id="myInput" class="col-md-6" placeholder="Search...">
+    </div>
+        <div class="row">
+            <div class="col-md-12 offset-2">
+                <div class="table table-hover table-responsive">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Patient</th>
+                            <th>Test Required</th>
+                            <th>Updated time</th>
+                            <th>Med number</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        {% for medical_record in medical_records %}
+                            <tbody id="myTable">
+                            <tr>
+                                <td>{{ medical_record.Patient_user_first_name }}
+                                    {{ medical_record.Patient_user_last_name }}</td>
+                                <td>{{ medical_record.test_required }}</td>
+                                <td>{{ medical_record.updated_date }}</td>
+                                <td>{{ medical_record.med_number }}</td>
+                                <td>
+                                    <div class="btn-row">
+                                        <a href="{% url 'medical_record_details' medical_record.id %}" class="btn btn-success btn-group">Details</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}
